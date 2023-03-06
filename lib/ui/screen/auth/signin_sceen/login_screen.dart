@@ -3,6 +3,7 @@ import 'package:flutter_login_ui/ui/screen/auth/signin_sceen/loginProvider.dart'
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../../bottom_navigationbar/bottom_navigationbar.dart';
 import '../../widgets/custom_sign_button.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
@@ -165,7 +166,7 @@ class LoginScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                                    builder: (context) => myBottomNavigationBar()));
                           },
                         ),
                       ),
