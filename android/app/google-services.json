@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "936462918207",
+    "project_id": "tritech-f3b06",
+    "storage_bucket": "tritech-f3b06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936462918207:android:da0409cf5fd8d0eeb00e8a",
+        "android_client_info": {
+          "package_name": "net.fluttertutorial.flutter_login_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936462918207-ciqmqho9kjkt4v3hrh75fihgp10kmvl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkCKlmreFrS00edg2k-Fvo57o0g0Fj3Ok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936462918207-ciqmqho9kjkt4v3hrh75fihgp10kmvl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
