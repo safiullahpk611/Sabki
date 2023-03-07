@@ -1,14 +1,15 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_ui/pages/youtube.dart';
-
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:flutter_login_ui/ui/screen/bottom_navigationbar/bottom_navigationbar.dart';
+import 'package:flutter_login_ui/ui/screen/home_screen/home_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import '../../../core/locator.dart';
 import '../../../core/services/auth_Services.dart';
-import '../../../pages/locator.dart';
-import '../auth/signin_sceen/login_page.dart';
-import '../forgot_password/forgot_password_page.dart';
+import '../auth/signUp_user/signUpScreen.dart';
+import '../auth/signin_sceen/login_screen.dart';
 import '../selection_screen/selection_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,127 +22,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool _isVisible = false;
-  // final _authService = locator<AuthServices>();
+  final _authService = locator<AuthServices>();
 
-  splashScreenDelay() async {
-    print("splash delay callng");
-    ///
-    /// splash screen delay
-    ///
-    await Future.delayed(Duration(seconds: 3));
-     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SelectionScreen()));
-    // print(_authService.isLogin);
-
-    
-  //   //  Get.offAll(() => LoginScreen());
-  //   // Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder)));
-  //   if (_authService.appUser.appUserId != null && _authService.isLogin!) {
-  //     if (_authService.appUser.isfirstLogin ==true) {
-  //      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>YoutubePlay()));
-  //     } else {
-  //      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ForgotPasswordPage()));
-  //       print('User id=> ${_authService.appUser.appUserId}');
-  //     }
-  //   } else if (_authService.appUser == null && !_authService.isLogin!) {
-  //       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
-    
-  //     print("App user name ${_authService.appUser.userEmail}");
-  //     print("isLogin ${_authService.isLogin}");
-  //   } else {
-  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
-  //     print("User email ${_authService.appUser.userEmail}");
-  //     print("isLogin ${_authService.isLogin}");
-  //   }
+  void initState() {
+    Timer(Duration(seconds: 3), () {
+      (FirebaseAuth.instance.currentUser != null)
+          ? Get.off(() => myBottomNavigationBar())
+          : Get.off(() => LoginScreen());
+    });
+    super.initState();
   }
-
-  _SplashScreenState(){
-
-    // new Timer(const Duration(milliseconds: 2000), (){
-    //   setState(() {
-    //     Navigator.of(context).pushAndRemoveUntil(
-    //     MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
-    //   });
-    // });
-
-    // new Timer(
-    //   Duration(milliseconds: 10),(){
-    //     setState(() {
-    //       _isVisible = true; // Now it is showing fade effect and navigating to Login page
-    //     });
-    //   }
-    // );
- 
-  }
-
-  @override
-     initState(){
-      splashScreenDelay();
-      super.initState();
-    }
-
   Widget build(BuildContext context) {
-
-
-
-   return Scaffold(
-    backgroundColor: Colors.black,
-    body: Center(child: SvgPicture.asset('assets/images/Sabki.site.svg')),
-   );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // return Container(
-    //   decoration: new BoxDecoration(
-    //     gradient: new LinearGradient(
-    //       colors: [Theme.of(context).accentColor, Theme.of(context).primaryColor],
-    //       begin: const FractionalOffset(0, 0),
-    //       end: const FractionalOffset(1.0, 0.0),
-    //       stops: [0.0, 1.0],
-    //       tileMode: TileMode.clamp,
-    //     ),
-    //   ),
-    //   child: AnimatedOpacity(
-    //     opacity: _isVisible ? 1.0 : 0,
-    //     duration: Duration(milliseconds: 1200),
-    //     child: Center(
-    //       child: Container(
-    //         height: 140.0,
-    //         width: 140.0,
-    //         child: Center(
-    //           child: ClipOval(
-    //             child: Icon(Icons.android_outlined, size: 128,), //put your logo here
-    //           ),
-    //         ),
-    //         decoration: BoxDecoration(
-    //           shape: BoxShape.circle,
-    //           color: Colors.white,
-    //           boxShadow: [
-    //             BoxShadow(
-    //               color: Colors.black.withOpacity(0.3),
-    //               blurRadius: 2.0,
-    //               offset: Offset(5.0, 3.0),
-    //               spreadRadius: 2.0,
-    //             )
-    //           ]
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(child: SvgPicture.asset('assets/images/Sabki.site.svg')),
+    );
   }
 }
