@@ -139,10 +139,10 @@ class _PluginsScreenState extends State<PluginsScreen> {
                           child: GridView.builder(
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                    mainAxisSpacing: 5,
-                                    crossAxisSpacing: 5,
+                                    mainAxisSpacing: 1,
+                                    crossAxisSpacing: 1,
                                     crossAxisCount: 2,
-                                    childAspectRatio: 1.2),
+                                    childAspectRatio: 0.9),
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -210,7 +210,7 @@ class _PluginsScreenState extends State<PluginsScreen> {
                                           "The best WordPress contact form plugin. Drag & Drop online form builder that helps you.",
                                           style: GoogleFonts.poppins(
                                               textStyle: TextStyle(
-                                                  fontSize: 8,
+                                                  fontSize: 11,
                                                   fontFamily: 'Poppins-Light')),
                                         ),
                                       ),
@@ -222,94 +222,92 @@ class _PluginsScreenState extends State<PluginsScreen> {
                           ),
                         )
                       : model.value == 1
-                          ? Expanded(
-                              child: GridView.builder(
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        mainAxisSpacing: 5,
-                                        crossAxisSpacing: 5,
-                                        crossAxisCount: 2,
-                                        childAspectRatio: 1.2),
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(8))),
-                                      padding: EdgeInsets.all(12),
-                                      child: Column(
+                          ?  Expanded(
+                          child: GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    mainAxisSpacing: 1,
+                                    crossAxisSpacing: 1,
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.9),
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8))),
+                                  padding: EdgeInsets.all(12),
+                                  child: Column(
+                                    children: [
+                                      Row(
                                         children: [
-                                          Row(
-                                            children: [
-                                              Image(
-                                                image: AssetImage(
-                                                  "assets/icons/gridview.png",
-                                                ),
-                                                fit: BoxFit.fill,
-                                                height: 25,
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "Cont Form",
-                                                    style: GoogleFonts.poppins(
-                                                        textStyle: TextStyle(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontFamily:
-                                                                'Poppins-Light')),
-                                                  ),
-                                                  Text(
-                                                    "@amicoco",
-                                                    style: GoogleFonts.poppins(
-                                                        textStyle: TextStyle(
-                                                            color:
-                                                                Colors.blueGrey,
-                                                            fontSize: 9,
-                                                            fontFamily:
-                                                                'Poppins-Light')),
-                                                  ),
-                                                ],
-                                              ),
-                                              Expanded(child: SizedBox()),
-                                              InkWell(
-                                                onTap: () {},
-                                                child: Icon(
-                                                  Icons.more_vert_outlined,
-                                                ),
-                                              )
-                                            ],
+                                          Image(
+                                            image: AssetImage(
+                                              "assets/icons/gridview.png",
+                                            ),
+                                            fit: BoxFit.fill,
+                                            height: 25,
                                           ),
                                           SizedBox(
-                                            height: 5,
+                                            width: 5,
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 5, vertical: 5),
-                                            child: Text(
-                                              "The best WordPress contact form plugin. Drag & Drop online form builder that helps you.",
-                                              style: GoogleFonts.poppins(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 8,
-                                                      fontFamily:
-                                                          'Poppins-Light')),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Cont Form",
+                                                style: GoogleFonts.poppins(
+                                                    textStyle: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            'Poppins-Light')),
+                                              ),
+                                              Text(
+                                                "@amicoco",
+                                                style: GoogleFonts.poppins(
+                                                    textStyle: TextStyle(
+                                                        color: Colors.blueGrey,
+                                                        fontSize: 9,
+                                                        fontFamily:
+                                                            'Poppins-Light')),
+                                              ),
+                                            ],
+                                          ),
+                                          Expanded(child: SizedBox()),
+                                          InkWell(
+                                            onTap: () {},
+                                            child: Icon(
+                                              Icons.more_vert_outlined,
                                             ),
-                                          ),
+                                          )
                                         ],
                                       ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            )
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 5),
+                                        child: Text(
+                                          "The best WordPress contact form plugin. Drag & Drop online form builder that helps you.",
+                                          style: GoogleFonts.poppins(
+                                              textStyle: TextStyle(
+                                                  fontSize: 11,
+                                                  fontFamily: 'Poppins-Light')),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        )
                           : SizedBox(),
                 ],
               ),

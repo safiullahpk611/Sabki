@@ -106,7 +106,7 @@ class _InquiresScreenState extends State<InquiresScreen> {
                                           textStyle: TextStyle(
                                               color:
                                                   Colors.blueGrey,
-                                              fontSize: 9,
+                                              fontSize: 11,
                                               fontFamily:
                                                   'Poppins-Light')),
                                     ),
@@ -127,7 +127,7 @@ class _InquiresScreenState extends State<InquiresScreen> {
                               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
                               child: Text("Hello, I'm interested in learning more about your product/service. Can you provide me with more information on pricing and features?",style: GoogleFonts.poppins(
                                   textStyle: TextStyle(
-                                      fontSize: 10,
+                                      fontSize: 12,
                                       fontFamily:
                                       'Poppins-Light')),),
                             ),

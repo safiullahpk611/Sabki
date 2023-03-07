@@ -96,10 +96,10 @@ class _MoreScreenState extends State<MoreScreen> {
               child: GridView.builder(
                 gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 5,
-                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 1,
+                    crossAxisSpacing: 1,
                     crossAxisCount: 2,
-                    childAspectRatio: 0.8),
+                    childAspectRatio: 0.7),
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
@@ -129,7 +129,7 @@ class _MoreScreenState extends State<MoreScreen> {
                                       "Siptra vibe",
                                       style: GoogleFonts.poppins(
                                           textStyle: TextStyle(
-                                              fontSize: 12,
+                                              fontSize: 14,
                                               fontWeight:
                                               FontWeight.w500,
                                               fontFamily:
@@ -157,7 +157,7 @@ class _MoreScreenState extends State<MoreScreen> {
                               "The best WordPress contact form plugin. Drag & Drop online form builder that helps you.",
                               style: GoogleFonts.poppins(
                                   textStyle: TextStyle(
-                                      fontSize: 8,
+                                      fontSize: 11,
                                       fontFamily: 'Poppins-Light')),
                             ),
                           ),

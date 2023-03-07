@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                   padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
@@ -110,9 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 80,
                         ),
                       ),
-                      SizedBox(
-                        width: 25,
-                      ),
+                      // SizedBox(
+                      //   width: 25,
+                      // ),
                       Column(
                         children: [
                           Text(
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                   padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
@@ -159,9 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 80,
                         ),
                       ),
-                      SizedBox(
-                        width: 25,
-                      ),
+                     
                       Column(
                         children: [
                           Text(
@@ -193,9 +191,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(8))),
-                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                   // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: 8),
                       chartRow(context, 'Jan', 89),
@@ -224,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Row(
       children: [
         Text(label),
-        SizedBox(height: 25),
+      
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 5),
           child: Stack(children: [

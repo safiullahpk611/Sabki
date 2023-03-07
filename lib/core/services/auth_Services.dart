@@ -79,10 +79,12 @@ class AuthServices{
       );
       print("===========>>> User login Successfully");
       if(credentials.user != null){
+        print(">>>>>>>>>>>>>>>>.>>>>>>>>>>>>>>>>>>>>> user not null");
         customAuthResult.user = credentials.user;
         this.appUser = appUser;
         this.appUser.appUserId = credentials.user!.uid;
         this.isLogin = true;
+        this.appUser.isfirstLogin=true;
         ///
         /// Get User ===========================>>>>
         ///

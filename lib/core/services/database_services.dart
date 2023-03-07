@@ -32,7 +32,9 @@ class DatabaseServices {
       print("????object ${snapshot.id}");
 
       return AppUser.fromJson(snapshot.data(), snapshot.id);
-    } catch (e) {
+      
+    } 
+    catch (e) {
       print('Exception @DatabaseService/getUser $e');
       return AppUser();
     }

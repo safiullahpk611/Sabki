@@ -55,6 +55,7 @@ class LoginProvider extends BaseViewModal {
       setState(ViewState.idle);
 
       if (customAuthResult.user != null) {
+        print(".............................................");
         print("App user Id: ${_authService.appUser.appUserId}");
 
         if (_authService.appUser.isfirstLogin == true) {
