@@ -217,7 +217,7 @@ myFunc(BuildContext context) {
                 buttonName: 'Build now',
                 buttoncolor: Colors.black,
                 onPress: () {
-                  Navigator.push(context,
+                  Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (contex) => EditProfile()));
                 })
         ]),

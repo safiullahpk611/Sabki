@@ -668,7 +668,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(height: 35),
                         Center(
                           child: Container(
-                            height: 30,
+                            height: 40,
                             width: 110,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
