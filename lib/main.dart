@@ -3,12 +3,13 @@ import 'package:flutter_login_ui/ui/screen/bottom_navigationbar/bottom_navigatio
 import 'package:hexcolor/hexcolor.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
+import 'core/locator.dart';
 import 'ui/screen/splash_screen/splash_screen.dart';
 
 void main() async{
     WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-   // await setupLocator();
+   await setupLocator();
   runApp(LoginUiApp());
 }
 

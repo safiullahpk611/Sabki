@@ -16,7 +16,7 @@ class myBottomNavigationBar extends StatefulWidget {
 
 class _myBottomNavigationBarState extends State<myBottomNavigationBar> {
 
-  int _page = 0;
+  int _page = 2;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   /// Called Screens by Bottom Navigation Bar ===>>>
@@ -45,7 +45,7 @@ class _myBottomNavigationBarState extends State<myBottomNavigationBar> {
           ],
           color: Colors.black,
           buttonBackgroundColor: Colors.black,
-          backgroundColor: Color(0xFFE9ECF0),
+          backgroundColor: Colors.transparent,
           animationCurve: Curves.easeInOut,
           animationDuration: Duration(milliseconds: 600),
           onTap: (index) {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/ui/screen/profile_screen/profile_screen_provider.dart';
-import 'package:flutter_login_ui/ui/screen/widgets/custom_sign_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../build_website/build_website.dart';
+import '../widgets/custom_appbar.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -46,34 +46,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     SizedBox(
                       height: 25,
                     ),
-                    Row(
-                      children: [
-                        Image.asset(
-                          'assets/icons/profile.png',
-                          height: 50,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text("Hello"),
-                            Text(
-                              "Jinni",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        Expanded(child: SizedBox()),
-                        Icon(
-                          Icons.search,
-                          color: Colors.black,
-                          size: 25,
-                        )
-                      ],
-                    ),
+                    /// Custom Appbar =====>>>
+                    CustomAppbar(),
                     SizedBox(
                       height: 30,
                     ),
