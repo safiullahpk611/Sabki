@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/ui/screen/bottom_navigationbar/bottom_navigationbar.dart';
+import 'package:flutter_login_ui/ui/website_detail_screen/website_detail_screen.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
@@ -41,8 +42,8 @@ class LoginUiApp extends StatelessWidget {
       //   scaffoldBackgroundColor: Colors.grey.shade100, colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey).copyWith(secondary: _accentColor),
       // ),
         theme: ThemeData(fontFamily: "Poppins-Light"),
-       home: SplashScreen(title: 'Flutter Login UI'),
-      // home: myBottomNavigationBar(),
+      // home: SplashScreen(title: 'Flutter Login UI'),
+       home: WebsiteDetailScreen(),
     );
   }
 }

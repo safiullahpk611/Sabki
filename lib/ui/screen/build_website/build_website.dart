@@ -253,6 +253,7 @@ class CustomTextFields extends StatelessWidget {
               // fillColor: Colors.white,
               border: InputBorder.none,
               hintText: hintText,
+              hintStyle: TextStyle(color: Color.fromARGB(64, 64, 64, 3))
             ),
           ),
         ),

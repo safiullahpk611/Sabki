@@ -5,18 +5,19 @@ import 'package:get/get.dart';
 import '../../../../core/enums/view_state.dart';
 import '../../../../core/locator.dart';
 import '../../../../core/models/appUser.dart';
-import '../../../../core/services/auth_Services.dart';
+import '../../../../core/services/auth_services.dart';
 import '../../../../core/services/custom_auth_result.dart';
 import '../../../../core/services/database_services.dart';
-import '../signin_sceen/login_screen.dart';
-
 
 class SignUpProvider extends BaseViewModal {
+  SignUpProvider() {
+    print("SignUp Provider built");
+  }
+
   final _authServices = locator<AuthServices>();
-  final locateUser = locator<AuthServices>();
   CustomAuthResult customAuthResult = CustomAuthResult();
-  final formKey = GlobalKey<FormState>();
   AppUser appUser = AppUser();
+  final formKey = GlobalKey<FormState>();
   bool isVisiblePassword = true;
 
   DatabaseServices databaseServices = DatabaseServices();
@@ -31,34 +32,39 @@ class SignUpProvider extends BaseViewModal {
     print("Password final state : $isVisiblePassword");
   }
 
-  bool checkBoxVal=false;
-  chanegeCheckBox(val){
-
-    checkBoxVal=val;
+  bool checkBoxVal = false;
+  chanegeCheckBox(val) {
+    checkBoxVal = val;
     notifyListeners();
   }
 
-  ///
-  /// Sign Up user  =======================================>>>
+  /// SignUp User  =======>>>>>
   ///
   signUpUser(AppUser appUser, BuildContext context) async {
-    print("object");
     if (formKey.currentState!.validate()) {
-      setState(ViewState.busy);
-
       print("User Email: ${appUser.userEmail}");
-      print("User Password: ${appUser.userPassword}");
-      appUser.isfirstLogin = true;
+      print("User Password: ${appUser.password}");
+      //
+      appUser.isFirstLogin = true;
       setState(ViewState.busy);
 
 
+      ///
       customAuthResult = await _authServices.signUpUser(appUser);
       setState(ViewState.idle);
       if (customAuthResult.user != null) {
         print("SignUpUserId=> ${_authServices.appUser.appUserId}");
         Get.off(() => myBottomNavigationBar());
-      } else {
-      }}
-  }
-}
 
+        // Navigator.pushReplacement(
+        //     context, CustomPageRoute(child: BottomNavigation()));
+      } else {
+        print(customAuthResult.errorMessage.toString());
+      }
+    } else {
+      print("not showing true");
+    }
+    //
+  }
+
+}

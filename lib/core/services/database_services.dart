@@ -6,7 +6,6 @@ import 'auth_Services.dart';
 class DatabaseServices {
   final firebaseFireStore = FirebaseFirestore.instance;
 
-
   ///
   /// Add user ============>>>
   ///
@@ -29,12 +28,8 @@ class DatabaseServices {
     try {
       final snapshot =
           await firebaseFireStore.collection('AppUser').doc(id).get();
-      print("????object ${snapshot.id}");
-
       return AppUser.fromJson(snapshot.data(), snapshot.id);
-      
-    } 
-    catch (e) {
+    } catch (e) {
       print('Exception @DatabaseService/getUser $e');
       return AppUser();
     }
@@ -48,7 +43,8 @@ class DatabaseServices {
     try {
       QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection('AppUser')
-          .where('appUserId', isNotEqualTo: locator<AuthServices>().appUser.appUserId)
+          .where('appUserId',
+              isNotEqualTo: locator<AuthServices>().appUser.appUserId)
           .get();
       if (snapshot.docs.length > 0) {
         snapshot.docs.forEach((element) {
@@ -63,7 +59,6 @@ class DatabaseServices {
     }
     return appUserList;
   }
-
 
   ///
   /// get all app users
@@ -103,62 +98,4 @@ class DatabaseServices {
       print('Exception@UpdateUserProfile=>$e');
     }
   }
-
-  //
-  // ///
-  // ///  Set Post Image Data Collection ========>>>
-  // ///
-  // setPostImage(PostImage postImage, String UserId) async {
-  //   try {
-  //     var id = DateTime.now().microsecondsSinceEpoch.toString();
-  //     postImage.postImageId = id;
-  //
-  //     await firebaseFireStore
-  //         .collection('PostImage')
-  //         .doc(UserId)
-  //         .collection('AllPostImages')
-  //         .doc(id)
-  //         .set(postImage.toJson());
-  //     return true;
-  //   }
-  //   catch (e) {
-  //     print("Exception@MakingPostImage=>$e");
-  //   }
-  // }
-
-  // ///
-  // ///  Delete Post Image Data Collection ========>>>
-  // ///
-  // deletePostImage(String id, String UserId) async {
-  //   try {
-  //
-  //     await firebaseFireStore
-  //         .collection('PostImage')
-  //         .doc(UserId)
-  //         .collection('AllPostImages')
-  //         .doc(id)
-  //         .delete();
-  //     return true;
-  //   } catch (e) {
-  //     print("Exception@DeletePostImage=>$e");
-  //   }
-  // }
-  //
-
-  // ///
-  // /// Get Post Image Data Collection ========>>>
-  // ///
-  // Stream<QuerySnapshot>? getPostImage() {
-  //   try {
-  //     Stream<QuerySnapshot> snapshots = FirebaseFirestore.instance
-  //         .collection('PostImage')
-  //         .doc(locator<AuthServices>().appUser.appUserId)
-  //         .collection('AllPostImages').orderBy('postImageDate',descending: true)
-  //         .snapshots();
-  //     return snapshots;
-  //   } catch (e) {
-  //     print('Exception @DatabaseService/GetPostImage$e');
-  //   }
-  // }
-
 }

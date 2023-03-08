@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/core/models/base_view_model.dart';
 import 'package:flutter_login_ui/ui/screen/bottom_navigationbar/bottom_navigationbar.dart';
-import 'package:flutter_login_ui/ui/screen/home_screen/home_screen.dart';
-
-
 import 'package:get/get.dart';
 import '../../../../core/enums/view_state.dart';
 import '../../../../core/locator.dart';
 import '../../../../core/models/appUser.dart';
-import '../../../../core/services/auth_Services.dart';
+import '../../../../core/services/auth_services.dart';
 import '../../../../core/services/custom_auth_result.dart';
 import '../../../../core/services/database_services.dart';
-import 'login_screen.dart';
 
 class LoginProvider extends BaseViewModal {
-  final _authService = locator<AuthServices>();
+  LoginProvider() {
+    print("SignIncProvider built");
+  }
+
   AppUser appUser = AppUser();
   final databaseServices = DatabaseServices();
-  CustomAuthResult customAuthResult = CustomAuthResult();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final _authServices = locator<AuthServices>();
+  CustomAuthResult customAuthResult = CustomAuthResult();
   final formKey = GlobalKey<FormState>();
   bool isVisiblePassword = true;
-
 
   ///
   /// Visible Password =================================>>>
@@ -34,41 +33,47 @@ class LoginProvider extends BaseViewModal {
     print("Password final state : $isVisiblePassword");
   }
 
-  bool checkBoxVal=false;
-  chanegeCheckBox(val){
-
-    checkBoxVal=val;
+  bool checkBoxVal = false;
+  chanegeCheckBox(val) {
+    checkBoxVal = val;
     notifyListeners();
   }
+
   ///
   /// Login user ============================================>>>
   ///
-  loginToApp(AppUser appUser, BuildContext context) async {
+  ///
+  ///
+
+  loginUser(AppUser appUser, BuildContext context) async {
     if (formKey.currentState!.validate()) {
-
-      print("App user email: ${appUser.userEmail}");
-      print("App user Password: ${appUser.userPassword}");
+      print("App user emailllllll: ${appUser.userEmail}");
+      print("App user Password: ${appUser.password}");
       setState(ViewState.busy);
-
-      customAuthResult = await _authService.loginUser(appUser);
+      customAuthResult = await _authServices.loginUser(appUser);
 
       setState(ViewState.idle);
 
       if (customAuthResult.user != null) {
-        print(".............................................");
-        print("App user Id: ${_authService.appUser.appUserId}");
-
-        if (_authService.appUser.isfirstLogin == true) {
+        print("App user Id: ${_authServices.appUser.appUserId}");
+        print("Is first Login=> ${_authServices.appUser.isFirstLogin}");
+        if (_authServices.appUser.isFirstLogin == true) {
           Get.off(() => myBottomNavigationBar());
-        } else if (_authService.appUser.isfirstLogin == false) {
-          Get.off(() => LoginScreen());
+
+        } else if (_authServices.appUser.isFirstLogin == false) {
+          //
         }
       } else {
-        // showSnackBar(
-        //   context,
-        //   "${customAuthResult.errorMessage!}",
-        //   duration: 5000,
-        // );
+        Get.snackbar(
+          "Error",
+          backgroundColor: Colors.white,
+          customAuthResult.errorMessage.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+
+        print(customAuthResult.errorMessage.toString());
+
+        //      }
       }
     }
   }

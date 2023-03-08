@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                   padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
@@ -58,11 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 BorderRadius.all(Radius.circular(50))),
                         child: Image.asset(
                           "assets/icons/person.png",
-                          height: 80,
+                          height: 65,
                         ),
-                      ),
-                      SizedBox(
-                        width: 25,
                       ),
                       Column(
                         children: [
@@ -82,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(),
                     ],
                   ),
                 ),
@@ -107,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 BorderRadius.all(Radius.circular(50))),
                         child: Image.asset(
                           "assets/icons/website.png",
-                          height: 80,
+                          height: 65,
                         ),
                       ),
                       // SizedBox(
@@ -131,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(),
                     ],
                   ),
                 ),
@@ -156,10 +155,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 BorderRadius.all(Radius.circular(50))),
                         child: Image.asset(
                           "assets/icons/person.png",
-                          height: 80,
+                          height: 65,
                         ),
                       ),
-                     
                       Column(
                         children: [
                           Text(
@@ -178,6 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(),
                     ],
                   ),
                 ),
@@ -193,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                   padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                   child: Column(
-                   // crossAxisAlignment: CrossAxisAlignment.center,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: 8),
                       chartRow(context, 'Jan', 89),
@@ -222,7 +221,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Row(
       children: [
         Text(label),
-      
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 5),
           child: Stack(children: [
