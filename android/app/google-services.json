@@ -1,33 +1,70 @@
 {
   "project_info": {
-    "project_number": "936462918207",
-    "project_id": "tritech-f3b06",
-    "storage_bucket": "tritech-f3b06.appspot.com"
+    "project_number": "786561416183",
+    "project_id": "sabkisite505",
+    "storage_bucket": "sabkisite505.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:936462918207:android:da0409cf5fd8d0eeb00e8a",
+        "mobilesdk_app_id": "1:786561416183:android:6b067244d1e1e6cfcb4cf2",
         "android_client_info": {
-          "package_name": "net.fluttertutorial.flutter_login_ui"
+          "package_name": "com.sabki.site"
         }
       },
       "oauth_client": [
         {
-          "client_id": "936462918207-ciqmqho9kjkt4v3hrh75fihgp10kmvl1.apps.googleusercontent.com",
+          "client_id": "786561416183-4lf2d5vg2tst3i2ob9qlqotejo23nn6c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sabki.site",
+            "certificate_hash": "96bfade004ea2e3d70bd20fe1017727de9fc5eea"
+          }
+        },
+        {
+          "client_id": "786561416183-dv9k5g6h6riddk6vl4cb2jov13b1gimh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAkCKlmreFrS00edg2k-Fvo57o0g0Fj3Ok"
+          "current_key": "AIzaSyAs7p8cE3liGyUseWeY2c_Ua2NQUONFbvk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "936462918207-ciqmqho9kjkt4v3hrh75fihgp10kmvl1.apps.googleusercontent.com",
+              "client_id": "786561416183-dv9k5g6h6riddk6vl4cb2jov13b1gimh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786561416183:android:c6ffa2b97f107e33cb4cf2",
+        "android_client_info": {
+          "package_name": "net.fluttertutorial.flutter_login_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786561416183-dv9k5g6h6riddk6vl4cb2jov13b1gimh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAs7p8cE3liGyUseWeY2c_Ua2NQUONFbvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786561416183-dv9k5g6h6riddk6vl4cb2jov13b1gimh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

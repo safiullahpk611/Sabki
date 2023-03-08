@@ -10,15 +10,16 @@ import '../../../core/services/auth_services.dart';
 import '../auth/signin_sceen/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({Key? key, required this.title}) : super(key: key);
+ 
 
-  final String title;
+
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  
   final _authService = locator<AuthServices>();
 
   @override
