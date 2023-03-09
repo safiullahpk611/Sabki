@@ -3,7 +3,6 @@ import 'package:flutter_login_ui/ui/screen/bottom_navigationbar/bottom_navigatio
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../build_website/build_website.dart';
-import '../website_details/website_details.dart';
 import '../widgets/custom_sign_button.dart';
 
 class SocialMediaDetailScreen extends StatefulWidget {

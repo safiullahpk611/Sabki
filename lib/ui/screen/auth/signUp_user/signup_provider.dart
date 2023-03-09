@@ -8,6 +8,7 @@ import '../../../../core/models/appUser.dart';
 import '../../../../core/services/auth_Services.dart';
 import '../../../../core/services/custom_auth_result.dart';
 import '../../../../core/services/database_services.dart';
+import '../../get_started/get_started.dart';
 import '../signin_sceen/login_screen.dart';
 
 
@@ -56,7 +57,7 @@ class SignUpProvider extends BaseViewModal {
       setState(ViewState.idle);
       if (customAuthResult.user != null) {
         print("SignUpUserId=> ${_authServices.appUser.appUserId}");
-        Get.off(() => myBottomNavigationBar());
+        Get.off(() => GetStartedScreen());
       } else {
       }}
   }

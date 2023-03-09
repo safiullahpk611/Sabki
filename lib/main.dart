@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_ui/ui/screen/bottom_navigationbar/bottom_navigationbar.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'core/locator.dart';

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/core/models/base_view_model.dart';
 import 'package:flutter_login_ui/ui/screen/bottom_navigationbar/bottom_navigationbar.dart';
-import 'package:flutter_login_ui/ui/screen/home_screen/home_screen.dart';
-
-
 import 'package:get/get.dart';
 import '../../../../core/enums/view_state.dart';
 import '../../../../core/locator.dart';
@@ -17,7 +14,7 @@ class LoginProvider extends BaseViewModal {
   final _authService = locator<AuthServices>();
   AppUser appUser = AppUser();
   final databaseServices = DatabaseServices();
-  CustomAuthResult customAuthResult = CustomAuthResult();
+  CustomAuthResult? customAuthResult ;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -54,7 +51,7 @@ class LoginProvider extends BaseViewModal {
 
       setState(ViewState.idle);
 
-      if (customAuthResult.user != null) {
+      if (customAuthResult?.user != null) {
         print(".............................................");
         print("App user Id: ${_authService.appUser.appUserId}");
 
