@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../build_website/build_website.dart';
+import '../website_details/website_details.dart';
 
 class ContentDetail extends StatelessWidget {
   const ContentDetail({super.key});
@@ -178,7 +179,12 @@ class ContentDetail extends StatelessWidget {
                         child: CustomSignButton(buttonName: 'Next',
                         buttoncolor: Colors.white,
                         textColor: Colors.black,
-                        
+                          onPress: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WebsiteDetailScreen()));
+                          },
                         ),
                       ),
                         SizedBox(height: 20,),
