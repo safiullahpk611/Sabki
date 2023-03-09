@@ -1,29 +1,33 @@
 class AppUser {
   String? appUserId;
+  String? userName;
   String? userEmail;
   String? userPassword;
-  bool? isfirstLogin;
+  bool? isFirstLogin;
 
   AppUser({
     this.appUserId,
+    this.userName,
     this.userEmail,
     this.userPassword,
-    this.isfirstLogin,
+    this.isFirstLogin,
   });
 
   AppUser.fromJson(json, id) {
     this.appUserId = id;
+    this.userName = json['userName'];
     this.userEmail = json['userEmail'];
     this.userPassword = json['userPassword'] ?? '';
-    this.isfirstLogin = json['isfirstLogin'] ?? '';
+    this.isFirstLogin = json['isFirstLogin'] ?? '';
   }
 
   toJson() {
     return {
       'appUserId': this.appUserId,
+      'userName': this.userName,
       'userEmail': this.userEmail,
       'password': this.userPassword,
-      'isFirstLogin': this.isfirstLogin,
+      'isFirstLogin': this.isFirstLogin,
     };
   }
 }

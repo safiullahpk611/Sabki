@@ -48,7 +48,7 @@ class SignUpProvider extends BaseViewModal {
 
       print("User Email: ${appUser.userEmail}");
       print("User Password: ${appUser.userPassword}");
-      appUser.isfirstLogin = true;
+      appUser.isFirstLogin = true;
       setState(ViewState.busy);
 
 

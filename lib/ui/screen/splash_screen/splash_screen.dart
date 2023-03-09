@@ -24,18 +24,50 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   final _authService = locator<AuthServices>();
 
+  @override
   void initState() {
-    Timer(Duration(seconds: 3), () {
-      (FirebaseAuth.instance.currentUser != null)
-          ? Get.off(() => myBottomNavigationBar())
-          : Get.off(() => LoginScreen());
-    });
+    splashScreenDelay();
+
     super.initState();
   }
+
+  splashScreenDelay() async {
+    ///
+    /// splash screen delay
+    ///
+    await Future.delayed(Duration(seconds: 3));
+
+    if (_authService.appUser.appUserId != null && _authService.isLogin!) {
+      if (_authService.appUser.isFirstLogin ?? false) {
+        Get.offAll(
+              () => myBottomNavigationBar(),
+        );
+      } else {
+        Get.offAll(() => myBottomNavigationBar());
+        print('User id=> ${_authService.appUser.appUserId}');
+        Future.delayed(Duration(seconds: 1));
+        // Get.snackbar("Congrats", "message",snackStyle: SnackStyle.FLOATING,isDismissible: true);
+      }
+    } else if (_authService.appUser == null && !_authService.isLogin!) {
+      Get.offAll(() => LoginScreen());
+      print("isLogin ${_authService.isLogin}");
+    } else {
+      Get.offAll(() => LoginScreen());
+      print("User email ${_authService.appUser.userEmail}");
+      print("isLogin ${_authService.isLogin}");
+    }
+
+    // Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthScreen()));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(child: SvgPicture.asset('assets/images/Sabki.site.svg')),
+      body: Container(
+        color: Colors.black,
+        height: MediaQuery.of(context).size.height,
+        child: Center(child: SvgPicture.asset('assets/images/Sabki.site.svg')),
+      ),
     );
   }
 }

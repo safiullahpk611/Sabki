@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_ui/ui/screen/auth/signin_sceen/loginProvider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
+import '../../../../core/enums/view_state.dart';
 import '../../widgets/custom_sign_button.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-
 import '../../widgets/custom_textfield.dart';
 import '../signin_sceen/login_screen.dart';
 import 'signup_provider.dart';
@@ -18,8 +17,13 @@ class SignUpScreen extends StatelessWidget {
       return SignUpProvider();
     }, child: Consumer<SignUpProvider>(builder: (context, model, child) {
       return Scaffold(
-        // backgroundColor: Colors.black,
-        body: Container(
+          // backgroundColor: Colors.black,
+          body: ModalProgressHUD(
+        progressIndicator: CircularProgressIndicator(
+          color: Colors.blue,
+        ),
+        inAsyncCall: model.state == ViewState.busy,
+        child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.black,
@@ -68,13 +72,37 @@ class SignUpScreen extends StatelessWidget {
                                   fontFamily: 'Poppins-Light')),
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.08),
+                            height: MediaQuery.of(context).size.height * 0.03),
                       ]),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                          "User Name",
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Poppins-Light'),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+
+                        /// User Name Text field ======>>>
+                        ///
+                        CustomSignTextfield(
+                          hintText: 'User Name',
+                          onChanged: (value) {
+                            model.appUser.userName = value;
+                          },
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
                         Text(
                           "Email Address",
                           style: GoogleFonts.poppins(
@@ -107,7 +135,7 @@ class SignUpScreen extends StatelessWidget {
                           //  suffixIcon: Icon(Icons.email,color: Colors.white,)
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.04),
+                            height: MediaQuery.of(context).size.height * 0.02),
                         Text(
                           "Password",
                           style: GoogleFonts.poppins(
@@ -188,11 +216,6 @@ class SignUpScreen extends StatelessWidget {
                                     )
                                   ]),
                                 ),
-                                // Container(
-                                //     child: TextButton(
-                                //   child: Text("Forgot Password"),
-                                //   onPressed: () {},
-                                // ))
                               ]),
                         ),
                         SizedBox(
@@ -249,13 +272,14 @@ class SignUpScreen extends StatelessWidget {
                             Expanded(
                                 child: Container(
                               child: Center(
-                                  child:
-                                      Image.asset('assets/images/facebook.png')),
+                                  child: Image.asset(
+                                      'assets/images/facebook.png')),
                             )),
                             Expanded(
                                 child: Container(
                               child: Center(
-                                  child: Image.asset('assets/images/google.png')),
+                                  child:
+                                      Image.asset('assets/images/google.png')),
                             )),
                             Expanded(
                                 child: Container(
@@ -279,7 +303,14 @@ class SignUpScreen extends StatelessWidget {
                                     fontFamily: 'Poppins-Light'),
                               ),
                             ),
-                            TextButton(onPressed: () {}, child: Text("Login"))
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginScreen()));
+                                },
+                                child: Text("Login"))
                           ],
                         ),
                         SizedBox(
@@ -292,7 +323,7 @@ class SignUpScreen extends StatelessWidget {
             ),
           ),
         ),
-      );
+      ));
     }));
   }
 }

@@ -84,7 +84,7 @@ class AuthServices{
         this.appUser = appUser;
         this.appUser.appUserId = credentials.user!.uid;
         this.isLogin = true;
-        this.appUser.isfirstLogin=true;
+        this.appUser.isFirstLogin=true;
         ///
         /// Get User ===========================>>>>
         ///

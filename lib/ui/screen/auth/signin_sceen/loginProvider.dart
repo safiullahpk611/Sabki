@@ -58,9 +58,9 @@ class LoginProvider extends BaseViewModal {
         print(".............................................");
         print("App user Id: ${_authService.appUser.appUserId}");
 
-        if (_authService.appUser.isfirstLogin == true) {
+        if (_authService.appUser.isFirstLogin == true) {
           Get.off(() => myBottomNavigationBar());
-        } else if (_authService.appUser.isfirstLogin == false) {
+        } else if (_authService.appUser.isFirstLogin == false) {
           Get.off(() => LoginScreen());
         }
       } else {

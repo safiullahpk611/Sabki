@@ -28,6 +28,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       },
       child: Consumer<ProfileScreenProvider>(builder: (context, model, child) {
         return Scaffold(
+          appBar: AppBar(actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: InkWell(
+                  onTap: () {
+                    model.logout(context);
+                  },
+                  child: Icon(Icons.login_outlined)),
+            )
+          ]),
           body: Container(
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
