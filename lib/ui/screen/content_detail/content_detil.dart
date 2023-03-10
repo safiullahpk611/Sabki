@@ -10,6 +10,7 @@ import '../../../core/enums/view_state.dart';
 import '../build_website/build_website.dart';
 import '../profile_screen/profile_screen_provider.dart';
 import '../website_details/website_details.dart';
+import '../widgets/text_field.dart';
 import 'contact_detail_provider.dart';
 
 class ContentDetail extends StatelessWidget {
@@ -22,12 +23,12 @@ class ContentDetail extends StatelessWidget {
     }, child: Consumer<ContactDetailProvider>(builder: (context, model, child) {
       return Scaffold(
           body: ModalProgressHUD(
-          progressIndicator: CircularProgressIndicator(
-            color: Colors.blue,
-          ),
-          inAsyncCall: model.state == ViewState.busy,
-            child: SafeArea(
-                  child: Container(
+        progressIndicator: CircularProgressIndicator(
+          color: Colors.blue,
+        ),
+        inAsyncCall: model.state == ViewState.busy,
+        child: SafeArea(
+          child: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/wallpaper (4).png"),
@@ -44,14 +45,16 @@ class ContentDetail extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Column(children: [
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.08),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.03),
                       Center(
                         child: SvgPicture.asset(
                           'assets/images/Sabki.site (3).svg',
                           width: 100,
                         ),
                       ),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.06),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.03),
                       Text("Content Detail",
                           style: GoogleFonts.poppins(
                             textStyle: TextStyle(
@@ -62,7 +65,7 @@ class ContentDetail extends StatelessWidget {
                           )),
                     ]),
                     SizedBox(
-                      height: 30,
+                      height: 15,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -82,18 +85,17 @@ class ContentDetail extends StatelessWidget {
                             CustomTextFields(
                               hintText: 'Dropdown (Owner, Proprietor, Manager',
                               onPress: (value) {
-                                model.appUser.contactPerson=value;
+                                model.appUser.contactPerson = value;
                               },
                               controller: model.contactPerson,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter your email";
-                              }
-                             
-                            },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter your email";
+                                }
+                              },
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             Text(
                               "Name of (Dropdown result)",
@@ -108,18 +110,17 @@ class ContentDetail extends StatelessWidget {
                             CustomTextFields(
                               hintText: 'Type here',
                               onPress: (value) {
-                                model.appUser.nameOFDropdownresult=value;
+                                model.appUser.nameOFDropdownresult = value;
                               },
                               controller: model.nameOFDropdownresult,
                               validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter dropDown value";
-                              }
-                             
-                            },
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter dropDown value";
+                                }
+                              },
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             Text(
                               "Mobile No",
@@ -134,18 +135,17 @@ class ContentDetail extends StatelessWidget {
                             CustomTextFields(
                               hintText: 'Enter here your Mobile No',
                               onPress: (value) {
-                                model.appUser.phoneNo=value;
+                                model.appUser.phoneNo = value;
                               },
                               controller: model.mobileNumber,
                               validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter your phone";
-                              }
-                             
-                            },
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter your phone";
+                                }
+                              },
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             Text(
                               "Secondly Mobile No",
@@ -159,19 +159,18 @@ class ContentDetail extends StatelessWidget {
                             ),
                             CustomTextFields(
                               onPress: (value) {
-                                model.appUser.secPhoneNo=value;
+                                model.appUser.secPhoneNo = value;
                               },
                               controller: model.secMobileNumController,
                               hintText: 'Enter here your Second Mobile No',
                               validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter your phone";
-                              }
-                             
-                            },
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter your phone";
+                                }
+                              },
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             Text(
                               "Email ID",
@@ -184,22 +183,22 @@ class ContentDetail extends StatelessWidget {
                               ),
                             ),
                             CustomTextFields(
-                                           validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter your email";
-                              }
-                              if (!value.contains("@")) {
-                                return "Enter valid email";
-                              }
-                            },
-                              onPress: (value) {
-                                model.appUser.emailId=value;
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter your email";
+                                }
+                                if (!value.contains("@")) {
+                                  return "Enter valid email";
+                                }
                               },
-                                controller: model.emailController,
+                              onPress: (value) {
+                                model.appUser.emailId = value;
+                              },
+                              controller: model.emailController,
                               hintText: 'Enter here your Email ID',
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             Text(
                               "Secondly Email ID",
@@ -212,22 +211,22 @@ class ContentDetail extends StatelessWidget {
                               ),
                             ),
                             CustomTextFields(
-                               validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter your email";
-                              }
-                              if (!value.contains("@")) {
-                                return "Enter valid email";
-                              }
-                            },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter your email";
+                                }
+                                if (!value.contains("@")) {
+                                  return "Enter valid email";
+                                }
+                              },
                               onPress: (value) {
-                                model.appUser.userSecEmail=value;
+                                model.appUser.userSecEmail = value;
                               },
                               controller: model.secEmailController,
                               hintText: 'Enter here your Secondly Email ID',
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             Text(
                               "Address",
@@ -241,19 +240,18 @@ class ContentDetail extends StatelessWidget {
                             ),
                             CustomTextFields(
                               onPress: (value) {
-                                model.appUser.address=value;
+                                model.appUser.address = value;
                               },
                               controller: model.addressController,
                               hintText: 'Enter here your Address',
                               validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter address";
-                              }
-                             
-                            },
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter address";
+                                }
+                              },
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             Text(
                               "Map Location",
@@ -267,31 +265,30 @@ class ContentDetail extends StatelessWidget {
                             ),
                             CustomTextFields(
                               onPress: (value) {
-                                model.appUser.mapLocation=value;
+                                model.appUser.mapLocation = value;
                               },
                               controller: model.mapAddressController,
                               hintText: 'Select Map Location',
                               validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter Map location";
-                              }
-                             
-                            },
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter Map location";
+                                }
+                              },
                             ),
                             //------------------upload Logo------------------
-                        
+
                             SizedBox(
-                              height: 40,
+                              height: 20,
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 35),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 35),
                               child: CustomSignButton(
                                 buttonName: 'Next',
                                 buttoncolor: Colors.white,
                                 textColor: Colors.black,
                                 onPress: () {
                                   model.updateProfile(model.appUser, context);
-                                  
                                 },
                               ),
                             ),
@@ -304,9 +301,9 @@ class ContentDetail extends StatelessWidget {
                 ),
               ),
             ),
-                  ),
-                ),
-          ));
+          ),
+        ),
+      ));
     }));
   }
 }

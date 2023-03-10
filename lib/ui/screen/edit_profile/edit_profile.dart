@@ -9,13 +9,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
-
 import '../auth/signin_sceen/loginProvider.dart';
 import '../build_website/build_website.dart';
 import '../build_website/build_website_provider.dart';
 import '../content_detail/content_detil.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../widgets/text_field.dart';
 import 'edit_profile_provider.dart';
 
 class EditProfile extends StatefulWidget {
@@ -27,7 +27,7 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   File? image;
-   File? image2;
+  File? image2;
   @override
   Future<void> getImageFromGallery() async {
     final pickedFile =
@@ -38,7 +38,8 @@ class _EditProfileState extends State<EditProfile> {
       });
     }
   }
-    Future<void> getImageFromGallery2() async {
+
+  Future<void> getImageFromGallery2() async {
     final pickedFile =
         await ImagePicker().getImage(source: ImageSource.gallery) as PickedFile;
     if (pickedFile != null) {
@@ -49,18 +50,19 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   Widget build(BuildContext context) {
-     return ChangeNotifierProvider(create: (context) {
+    return ChangeNotifierProvider(create: (context) {
       return EditProfileProvider();
     }, child: Consumer<EditProfileProvider>(builder: (context, model, child) {
       return Scaffold(
-          body:  ModalProgressHUD(
-          progressIndicator: CircularProgressIndicator(
-            color: Colors.blue,
-          ),
-          inAsyncCall: model.state == ViewState.busy,
-            child: SafeArea(
-                  child: Container(
-            height:MediaQuery.of(context).size.height,
+          body: ModalProgressHUD(
+        progressIndicator: CircularProgressIndicator(
+          color: Colors.blue,
+        ),
+        inAsyncCall: model.state == ViewState.busy,
+        child: SafeArea(
+          child: Container(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/wallpaper (4).png"),
@@ -75,11 +77,11 @@ class _EditProfileState extends State<EditProfile> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Column(children: [
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.10),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.06),
                     Center(
-                        child:
-                            SvgPicture.asset('assets/images/Sabki.site (3).svg')),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.07),
+                        child: SvgPicture.asset(
+                            'assets/images/Sabki.site (3).svg')),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                     Text("Edit profile",
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
@@ -90,7 +92,8 @@ class _EditProfileState extends State<EditProfile> {
                         )),
                   ]),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -105,8 +108,8 @@ class _EditProfileState extends State<EditProfile> {
                             ),
                           ),
                           CustomTextFields(
-                            onPress: (Value){
-                              model.appUser.businessName=Value;
+                            onPress: (Value) {
+                              model.appUser.businessName = Value;
                             },
                             controller: model.businessNameController,
                             hintText: 'Enter Your Business Name',
@@ -126,12 +129,10 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                           CustomTextFields(
                             hintText: 'https://www.sabkisite.com/user12',
-                            onPress: (Value){
-                              model.appUser.websiteUrl=Value;
+                            onPress: (Value) {
+                              model.appUser.websiteUrl = Value;
                             },
-                              controller: model.websiteUrlController,
-                            
-                            
+                            controller: model.websiteUrlController,
                           ),
                           SizedBox(
                             height: 15,
@@ -151,52 +152,50 @@ class _EditProfileState extends State<EditProfile> {
                             children: [
                               Expanded(
                                   child: Container(
-                                height: 100,
+                                height: 130,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Center(
-                                  child:
-                                  model. image==null?   smallCustomButtonEdit(
-                                        
+                                  child: model.image == null
+                                      ? smallCustomButtonEdit(
                                           onPress: () {
-                                           model.getImage();
+                                            model.getImage();
                                           },
                                           buttonName: 'Choose Logo',
                                           buttonColor: Colors.grey.shade200,
                                           textColor: Colors.black,
-                                        ):InkWell(
-                                          onTap: (){
-                                           model.getImage();
+                                        )
+                                      : InkWell(
+                                          onTap: () {
+                                            model.getImage();
                                           },
                                           child: Image.file(
-                                                 model. image!,
-                                                  fit: BoxFit.fill,
-                                                ),
+                                            model.image!,
+                                            fit: BoxFit.fill,
+                                          ),
                                         ),
-                                    
                                 ),
                               )),
                               //------------------- Update Logo Button
                               Expanded(
                                   child: Container(
                                 child: Center(
-                                  child: smallCustomButtonEdit(
-                                    onPress: (){
-                                      model.UploadImage();
-                                    },
-                                    buttonName: 'Update Logo',
-                                    buttonColor: Colors.black,
-                                    textColor: Colors.white,
-                                  )
-                                ),
+                                    child: smallCustomButtonEdit(
+                                  onPress: () {
+                                    model.UploadImage();
+                                  },
+                                  buttonName: 'Update Logo',
+                                  buttonColor: Colors.black,
+                                  textColor: Colors.white,
+                                )),
                               ))
                             ],
                           ),
                           SizedBox(
                             height: 15,
                           ),
-                       Text(
+                          Text(
                             "FavIcon",
                             style: GoogleFonts.poppins(
                               textStyle: TextStyle(
@@ -210,45 +209,43 @@ class _EditProfileState extends State<EditProfile> {
                             children: [
                               Expanded(
                                   child: Container(
-                                height: 100,
+                                height: 130,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Center(
-                                  child:
-                                   model.favIon==null?   smallCustomButtonEdit(
-                                        
+                                  child: model.favIon == null
+                                      ? smallCustomButtonEdit(
                                           onPress: () {
                                             model.getFavIcon();
                                           },
                                           buttonName: 'Choose Image',
                                           buttonColor: Colors.grey.shade200,
                                           textColor: Colors.black,
-                                        ):InkWell(
-                                          onTap: (){
+                                        )
+                                      : InkWell(
+                                          onTap: () {
                                             model.getFavIcon();
                                           },
                                           child: Image.file(
-                                                 model.favIon!,
-                                                  fit: BoxFit.fill,
-                                                ),
+                                            model.favIon!,
+                                            fit: BoxFit.fill,
+                                          ),
                                         ),
-                                    
                                 ),
                               )),
                               //------------------- Update Logo Button
                               Expanded(
                                   child: Container(
                                 child: Center(
-                                  child: smallCustomButtonEdit(
-                                    onPress: (){
-                                     model.UploadFavIcon();
-                                    },
-                                    buttonName: 'Update Image',
-                                    buttonColor: Colors.black,
-                                    textColor: Colors.white,
-                                  )
-                                ),
+                                    child: smallCustomButtonEdit(
+                                  onPress: () {
+                                    model.UploadFavIcon();
+                                  },
+                                  buttonName: 'Update Image',
+                                  buttonColor: Colors.black,
+                                  textColor: Colors.white,
+                                )),
                               ))
                             ],
                           ),
@@ -262,8 +259,7 @@ class _EditProfileState extends State<EditProfile> {
                               buttoncolor: Colors.white,
                               textColor: Colors.black,
                               onPress: () {
-                                model.updateProfile(model.appUser
-                                , context);
+                                model.updateProfile(model.appUser, context);
                               },
                             ),
                           ),
@@ -275,11 +271,10 @@ class _EditProfileState extends State<EditProfile> {
                 ],
               ),
             ),
-                  ),
-                ),
-          )
-      );
-  }));
+          ),
+        ),
+      ));
+    }));
   }
 }
 

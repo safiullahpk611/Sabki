@@ -14,60 +14,48 @@ import '../../../core/services/database_storage_services.dart';
 import '../content_detail/content_detil.dart';
 import '../website_details/website_details.dart';
 
-class ContactDetailProvider extends BaseViewModal{
+class ContactDetailProvider extends BaseViewModal {
   final formKey = GlobalKey<FormState>();
-   final locateUser = locator<AuthServices>();
-     final databaseServices = DatabaseServices();
-       AppUser appUser = AppUser();
+  final locateUser = locator<AuthServices>();
+  final databaseServices = DatabaseServices();
+  AppUser appUser = AppUser();
 
-   TextEditingController contactPerson = TextEditingController();
+  TextEditingController contactPerson = TextEditingController();
   TextEditingController mobileNumber = TextEditingController();
-     TextEditingController secMobileNumController = TextEditingController();
-  TextEditingController emailController= TextEditingController();
-    TextEditingController secEmailController= TextEditingController();
-      TextEditingController addressController= TextEditingController();
-    TextEditingController mapAddressController= TextEditingController();
-        TextEditingController nameOFDropdownresult= TextEditingController();
+  TextEditingController secMobileNumController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController secEmailController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController mapAddressController = TextEditingController();
+  TextEditingController nameOFDropdownresult = TextEditingController();
 
- ContactDetailProvider(){
-   appUser = locateUser.appUser;
-  contactPerson =
+  ContactDetailProvider() {
+    appUser = locateUser.appUser;
+    contactPerson =
         TextEditingController(text: locateUser.appUser.contactPerson);
-    mobileNumber =
-        TextEditingController(text: locateUser.appUser.phoneNo);
-          secMobileNumController =
+    mobileNumber = TextEditingController(text: locateUser.appUser.phoneNo);
+    secMobileNumController =
         TextEditingController(text: locateUser.appUser.secPhoneNo);
-      
-          emailController =
-        TextEditingController(text: locateUser.appUser.emailId);
-          secEmailController =
+
+    emailController = TextEditingController(text: locateUser.appUser.emailId);
+    secEmailController =
         TextEditingController(text: locateUser.appUser.userSecEmail);
-   
-         addressController =
-        TextEditingController(text: locateUser.appUser.address);
-          mapAddressController =
+
+    addressController = TextEditingController(text: locateUser.appUser.address);
+    mapAddressController =
         TextEditingController(text: locateUser.appUser.mapLocation);
 
-           nameOFDropdownresult=
-            TextEditingController(text: locateUser.appUser.nameOFDropdownresult);
-   
- }
- 
- 
- 
+    nameOFDropdownresult =
+        TextEditingController(text: locateUser.appUser.nameOFDropdownresult);
+  }
+
   updateProfile(AppUser appUser, BuildContext context) async {
     setState(ViewState.busy);
     await databaseServices.updateUserProfile(appUser);
     setState(ViewState.idle);
     print("profile updated successfully");
 
-    Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          WebsiteDetailScreen()));
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => WebsiteDetailScreen()));
   }
- 
-
-
 }

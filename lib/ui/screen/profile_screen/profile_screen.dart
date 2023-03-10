@@ -6,6 +6,7 @@ import '../../../core/locator.dart';
 import '../../../core/services/auth_Services.dart';
 import '../build_website/build_website.dart';
 import '../widgets/custom_appbar.dart';
+import '../widgets/text_field.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   @override
-    final locateUser = locator<AuthServices>();
+  final locateUser = locator<AuthServices>();
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) {
@@ -58,8 +59,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     SizedBox(
                       height: 25,
                     ),
+
                     /// Custom Appbar =====>>>
-                    CustomAppbar(title: '${locateUser.appUser.userName}',),
+                    CustomAppbar(
+                      title: '${locateUser.appUser.userName}',
+                    ),
                     SizedBox(
                       height: 30,
                     ),

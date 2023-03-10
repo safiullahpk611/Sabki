@@ -15,16 +15,15 @@ class AppUser {
   String? userSecEmail;
   String? address;
   String? mapLocation;
-  String?nameOFDropdownresult;
-  String?emailId;
-  String?homePageHeading;
-  String?homePageSubHeading;
-  String?bussinessShortDescription;
-  String?instagramUrl;
-  String?facebookUrl;
-  String?twittrerUrl;
-  String?youtubeUrl;
-
+  String? nameOFDropdownresult;
+  String? emailId;
+  String? homePageHeading;
+  String? homePageSubHeading;
+  String? bussinessShortDescription;
+  String? instagramUrl;
+  String? facebookUrl;
+  String? twittrerUrl;
+  String? youtubeUrl;
 
   AppUser({
     this.appUserId,
@@ -32,8 +31,8 @@ class AppUser {
     this.userEmail,
     this.userPassword,
     this.isFirstLogin,
-this.nameOFDropdownresult,
-this.emailId,
+    this.nameOFDropdownresult,
+    this.emailId,
     this.businessName,
     this.websiteUrl,
     this.logoImage,
@@ -70,17 +69,16 @@ this.emailId,
     this.userSecEmail = json['userSecEmail'];
     this.address = json['address'];
     this.mapLocation = json['mapLocation'];
-     this.nameOFDropdownresult = json['nameOFDropdownresult'];
-        this.emailId = json['emailId'];
-       this.homePageHeading = json['homePageHeading'];
-         this.homePageSubHeading = json['homePageSubHeading'];
+    this.nameOFDropdownresult = json['nameOFDropdownresult'];
+    this.emailId = json['emailId'];
+    this.homePageHeading = json['homePageHeading'];
+    this.homePageSubHeading = json['homePageSubHeading'];
 
-      this.bussinessShortDescription = json['bussinessShortDescription'];
-      this.instagramUrl= json['instagramUrl'];
-      this.facebookUrl= json['facebookUrl'];
-      this.twittrerUrl= json['twittrerUrl'];
-      this.youtubeUrl= json['youtubeUrl'];
-
+    this.bussinessShortDescription = json['bussinessShortDescription'];
+    this.instagramUrl = json['instagramUrl'];
+    this.facebookUrl = json['facebookUrl'];
+    this.twittrerUrl = json['twittrerUrl'];
+    this.youtubeUrl = json['youtubeUrl'];
   }
 
   toJson() {
@@ -90,7 +88,6 @@ this.emailId,
       'userEmail': this.userEmail,
       'password': this.userPassword,
       'isFirstLogin': this.isFirstLogin,
-
       'businessName': this.businessName,
       'websiteUrl': this.websiteUrl,
       'logoImage': this.logoImage,
@@ -102,15 +99,14 @@ this.emailId,
       'address': this.address,
       'mapLocation': this.mapLocation,
       'nameOFDropdownresult': this.nameOFDropdownresult,
-          'emailId': this.emailId,
-                 'homePageHeading': this.homePageHeading,
-                   'homePageSubHeading': this.homePageSubHeading,
-                   'bussinessShortDescription': this.bussinessShortDescription,
-                    'facebookUrl': this.facebookUrl,
-                     'twittrerUrl': this.twittrerUrl,
-                         'instagramUrl': this.instagramUrl,
-                           'youtubeUrl': this.youtubeUrl,
-
+      'emailId': this.emailId,
+      'homePageHeading': this.homePageHeading,
+      'homePageSubHeading': this.homePageSubHeading,
+      'bussinessShortDescription': this.bussinessShortDescription,
+      'facebookUrl': this.facebookUrl,
+      'twittrerUrl': this.twittrerUrl,
+      'instagramUrl': this.instagramUrl,
+      'youtubeUrl': this.youtubeUrl,
     };
   }
 }

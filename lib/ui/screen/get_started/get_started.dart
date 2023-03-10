@@ -43,7 +43,7 @@ class GetStartedScreen extends StatelessWidget {
                         SvgPicture.asset('assets/images/Sabki.site (2).svg')),
               )),
           Expanded(
-              flex: 2,
+              flex: 3,
               child: Container(
                 margin: EdgeInsets.only(right: 10, left: 10),
                 width: double.infinity,
@@ -68,7 +68,7 @@ class GetStartedScreen extends StatelessWidget {
                             color: Colors.white,
                           ),
                           SizedBox(
-                              height: MediaQuery.of(context).size.height / 15),
+                              height: MediaQuery.of(context).size.height / 25),
                           Text(
                             'Grow Your Business From Anywhere',
                             style: TextStyle(
@@ -96,7 +96,7 @@ class GetStartedScreen extends StatelessWidget {
                               children: [
                                 SizedBox(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.4,
+                                      MediaQuery.of(context).size.height * 0.35,
                                   child: PageView.builder(
                                     itemCount: items.length,
                                     itemBuilder:

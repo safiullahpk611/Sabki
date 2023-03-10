@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../edit_profile/edit_profile.dart';
+import '../widgets/text_field.dart';
 
 enum BestTutorSite { javatpoint, w3schools, tutorialandexample }
 
@@ -39,6 +40,7 @@ class _BuildWebsiteState extends State<BuildWebsite> {
       child: Consumer<BuildWebsiteProvider>(builder: (context, model, child) {
         return Scaffold(
           body: Container(
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/wallpaper (4).png"),
@@ -77,7 +79,7 @@ class _BuildWebsiteState extends State<BuildWebsite> {
                           ),
                           SizedBox(
                               height:
-                                  MediaQuery.of(context).size.height * 0.06),
+                                  MediaQuery.of(context).size.height * 0.04),
                           Text(
                             "Sabki.site Website Maker combines your logo design preferences with Artificial Intelligence"
                             "to help you create a custom logo you'll love. All it takes is a few clicks and five minutes.",
@@ -110,8 +112,9 @@ class _BuildWebsiteState extends State<BuildWebsite> {
                                 buttoncolor: Colors.white,
                                 buttonName: 'Next',
                                 onPress: () async {
-                                  await model.updateProfile(model.appUser, context);
-                                 myFunc(context);
+                                  await model.updateProfile(
+                                      model.appUser, context);
+                                  myFunc(context);
                                 }),
                           ),
                         ]),
@@ -192,85 +195,38 @@ class _BuildWebsiteState extends State<BuildWebsite> {
 }
 
 myFunc(BuildContext context) {
- return  showDialog(
+  return showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-        
-      children: [
-            Text(
-              'The domain you select will be your site\'s address',
-              style: GoogleFonts.poppins(
-                textStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Poppins-Light'),
-              ),
-              textAlign: TextAlign.center,
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Text(
+            'The domain you select will be your site\'s address',
+            style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Poppins-Light'),
             ),
-            CustomTextFields(
-              hintText: 'www.google.com',
-            ),
-            CustomTextFields(
-              hintText: 'For example connect www.mystunningwebsite.com',
-            ),
-            CustomSignButton(
-                textColor: Colors.white,
-                buttonName: 'Build now',
-                buttoncolor: Colors.black,
-                onPress: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (contex) => EditProfile()));
-                })
+            textAlign: TextAlign.center,
+          ),
+          CustomTextFields(
+            hintText: 'www.google.com',
+          ),
+          CustomTextFields(
+            hintText: 'For example connect www.mystunningwebsite.com',
+          ),
+          CustomSignButton(
+              textColor: Colors.white,
+              buttonName: 'Build now',
+              buttoncolor: Colors.black,
+              onPress: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (contex) => EditProfile()));
+              })
         ]),
       );
-            
-         
     },
   );
-}
-
-class CustomTextFields extends StatelessWidget {
-  final hintText;
-  final onPress;
-  final controller;
-  final validator;
-  const CustomTextFields({
-    super.key,
-    this.hintText,
-    this.onPress,
-    this.controller,
-    this.validator
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 45,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Center(
-          child: TextFormField(
-            validator: validator,
-            onChanged: onPress,
-            controller: controller,
-            decoration: InputDecoration(
-              // filled: true,
-              // fillColor: Colors.white,
-              border: InputBorder.none,
-              hintText: hintText,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }

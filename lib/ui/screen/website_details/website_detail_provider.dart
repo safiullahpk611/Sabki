@@ -15,44 +15,33 @@ import '../bottom_navigationbar/bottom_navigationbar.dart';
 import '../content_detail/content_detil.dart';
 import '../website_details/website_details.dart';
 
-class WebsiteDetailProvider extends BaseViewModal{
+class WebsiteDetailProvider extends BaseViewModal {
   final formKey = GlobalKey<FormState>();
-   final locateUser = locator<AuthServices>();
-     final databaseServices = DatabaseServices();
-       AppUser appUser = AppUser();
+  final locateUser = locator<AuthServices>();
+  final databaseServices = DatabaseServices();
+  AppUser appUser = AppUser();
 
-   TextEditingController homePageHeading= TextEditingController();
-  TextEditingController homePageSubHeading= TextEditingController();
-     TextEditingController bussinessShortDescription = TextEditingController();
-  
+  TextEditingController homePageHeading = TextEditingController();
+  TextEditingController homePageSubHeading = TextEditingController();
+  TextEditingController bussinessShortDescription = TextEditingController();
 
- WebsiteDetailProvider(){
-   appUser = locateUser.appUser;
-  homePageHeading =
+  WebsiteDetailProvider() {
+    appUser = locateUser.appUser;
+    homePageHeading =
         TextEditingController(text: locateUser.appUser.homePageHeading);
     homePageSubHeading =
         TextEditingController(text: locateUser.appUser.homePageSubHeading);
-          bussinessShortDescription =
-        TextEditingController(text: locateUser.appUser.bussinessShortDescription);
-    
-   
- }
- 
- 
- 
+    bussinessShortDescription = TextEditingController(
+        text: locateUser.appUser.bussinessShortDescription);
+  }
+
   updateProfile(AppUser appUser, BuildContext context) async {
     setState(ViewState.busy);
     await databaseServices.updateUserProfile(appUser);
     setState(ViewState.idle);
     print("profile updated successfully");
 
-    Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          myBottomNavigationBar()));
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => myBottomNavigationBar()));
   }
- 
-
-
 }

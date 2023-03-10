@@ -25,6 +25,7 @@ class SignUpScreen extends StatelessWidget {
         inAsyncCall: model.state == ViewState.busy,
         child: Container(
           width: double.infinity,
+          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             color: Colors.black,
             image: DecorationImage(
@@ -44,12 +45,12 @@ class SignUpScreen extends StatelessWidget {
                       //mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.12),
+                            height: MediaQuery.of(context).size.height * 0.085),
                         Center(
                             child: SvgPicture.asset(
                                 'assets/images/Sabki.site (1).svg')),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.05),
+                            height: MediaQuery.of(context).size.height * 0.03),
                         Text(
                           "Create an Account",
                           style: GoogleFonts.poppins(
@@ -72,7 +73,7 @@ class SignUpScreen extends StatelessWidget {
                                   fontFamily: 'Poppins-Light')),
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03),
+                            height: MediaQuery.of(context).size.height * 0.02),
                       ]),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -184,7 +185,7 @@ class SignUpScreen extends StatelessWidget {
                           },
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         Container(
                           child: Row(
@@ -219,7 +220,7 @@ class SignUpScreen extends StatelessWidget {
                               ]),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 15,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -266,7 +267,7 @@ class SignUpScreen extends StatelessWidget {
                           ]),
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.05),
+                            height: MediaQuery.of(context).size.height * 0.03),
                         Container(
                           child: Row(children: [
                             Expanded(
