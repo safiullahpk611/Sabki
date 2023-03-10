@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/ui/screen/bottom_navigationbar/bottom_navigationbar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../build_website/build_website.dart';
 import '../widgets/custom_sign_button.dart';
+import 'social_media-detial_provider.dart';
 
 class SocialMediaDetailScreen extends StatefulWidget {
   const SocialMediaDetailScreen({super.key});
@@ -16,6 +18,11 @@ class _SocialMediaDetailScreenState extends State<SocialMediaDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+        return ChangeNotifierProvider(
+      create: (context) {
+        return SocialMediaDetailProvider();
+      },
+      child: Consumer<SocialMediaDetailProvider>(builder: (context, model, child) {
     return Scaffold(
         body: SafeArea(
           child: Container(
@@ -80,6 +87,16 @@ class _SocialMediaDetailScreenState extends State<SocialMediaDetailScreen> {
                                   ),
                                 ),
                                 CustomTextFields(
+                                  onPress: (value) {
+                                  model.appUser.instagramUrl=value;
+                                },
+                                controller: model.instagramUrl,
+                              
+                                validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter Instagram Url";
+                                }
+                                },
                                     hintText:
                                     "Enter your Instagram URL"),
 
@@ -103,6 +120,17 @@ class _SocialMediaDetailScreenState extends State<SocialMediaDetailScreen> {
                                   ),
                                 ),
                                 CustomTextFields(
+                                   onPress: (value) {
+                                  model.appUser.facebookUrl=value;
+                                },
+                                controller: model.facebookUrl,
+                              
+                                validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter Facebook Url";
+                                }
+                                },
+                                   
                                     hintText:
                                     "Enter your Facebook URL"),
 
@@ -126,6 +154,17 @@ class _SocialMediaDetailScreenState extends State<SocialMediaDetailScreen> {
                                   ),
                                 ),
                                 CustomTextFields(
+                                   onPress: (value) {
+                                  model.appUser.twittrerUrl=value;
+                                },
+                                controller: model.twittrerUrl,
+                              
+                                validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter Twitter Url";
+                                }
+                                },
+                                   
                                     hintText:
                                     "Enter your Twitter URL"),
 
@@ -149,31 +188,23 @@ class _SocialMediaDetailScreenState extends State<SocialMediaDetailScreen> {
                                   ),
                                 ),
                                 CustomTextFields(
+                                   onPress: (value) {
+                                  model.appUser.youtubeUrl=value;
+                                },
+                                controller: model.youtubeUrl,
+                              
+                                validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter Youtube Url";
+                                }
+                                },
+                                   
                                     hintText:
                                     "Enter your Youtube URL"),
 
                                 /// Whatsapp Textfield
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Padding(
-                                  padding:
-                                  const EdgeInsets.only(
-                                      left: 15),
-                                  child: Text(
-                                    "Whatsapp",
-                                    style: GoogleFonts.poppins(
-                                        textStyle: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight:
-                                            FontWeight.w500,
-                                            fontFamily:
-                                            'Poppins-Light')),
-                                  ),
-                                ),
-                                CustomTextFields(
-                                    hintText:
-                                    "Enter your Whatsapp URL"),
+                               
+                             
                                 SizedBox(
                                   height: 20,
                                 ),
@@ -191,10 +222,7 @@ class _SocialMediaDetailScreenState extends State<SocialMediaDetailScreen> {
                               buttoncolor: Colors.white,
                               textColor: Colors.black,
                               onPress: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => myBottomNavigationBar()));
+                              model.updateProfile(model.appUser, context);
                               },
                             ),
                           ),
@@ -208,5 +236,5 @@ class _SocialMediaDetailScreenState extends State<SocialMediaDetailScreen> {
             ),
           ),
         ));
-  }
+  }));}
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/locator.dart';
+import '../../../core/services/auth_Services.dart';
+
 class MoreScreen extends StatefulWidget {
   const MoreScreen({Key? key}) : super(key: key);
 
@@ -9,6 +12,7 @@ class MoreScreen extends StatefulWidget {
 }
 
 class _MoreScreenState extends State<MoreScreen> {
+  final locateUser = locator<AuthServices>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_ui/core/enums/view_state.dart';
 import 'package:flutter_login_ui/core/models/base_view_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,13 +8,16 @@ import '../../../core/locator.dart';
 import '../../../core/models/appUser.dart';
 import '../../../core/services/auth_Services.dart';
 import '../../../core/services/database_services.dart';
+import '../../../core/services/database_storage_services.dart';
 import '../edit_profile/edit_profile.dart';
 import '../widgets/custom_sign_button.dart';
 import 'build_website.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class BuildWebsiteProvider extends BaseViewModal {
   final PageController controller = PageController(initialPage: 0);
-  BestTutorSite site = BestTutorSite.javatpoint;
+
   int radio = 0;
   radioBoxVa(val) {
     radio = val;
@@ -24,16 +28,25 @@ class BuildWebsiteProvider extends BaseViewModal {
   final locateUser = locator<AuthServices>();
   final formKey = GlobalKey<FormState>();
   final databaseServices = DatabaseServices();
+  
+  final currentAppUser = locator<AuthServices>().appUser;
+  DatabaseStorageServices databaseStorageServices = DatabaseStorageServices();
+
 
   String? editName;
 
   TextEditingController nameController = TextEditingController();
-
-  GetStartedScreenProvider() {
+  TextEditingController businessNameController = TextEditingController();
+  TextEditingController websiteUrlController = TextEditingController();
+  BuildWebsiteProvider() {
+    print("<<<<<<<<<<<");
     appUser = locateUser.appUser;
 
-    nameController = TextEditingController(text: locateUser.appUser.businessName);
-
+    businessNameController =
+        TextEditingController(text: locateUser.appUser.businessName);
+    websiteUrlController =
+        TextEditingController(text: locateUser.appUser.websiteUrl);
+    print("<<<<<<<<<<< ${nameController.text}");
   }
 
   getAppUserData() async {
@@ -46,13 +59,14 @@ class BuildWebsiteProvider extends BaseViewModal {
   ///
 
   updateProfile(AppUser appUser, BuildContext context) async {
+    setState(ViewState.busy);
     await databaseServices.updateUserProfile(appUser);
-
+    setState(ViewState.idle);
     print("profile updated successfully");
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => BuildWebsite()),
+      MaterialPageRoute(builder: (context) => EditProfile()),
     );
   }
 
@@ -89,47 +103,22 @@ class BuildWebsiteProvider extends BaseViewModal {
     'Option 2',
     'Option 3',
   ];
-
-  void handleRadioValueChanged(int value) {
-    selectedOption = value;
-  }
-
-  showDiaLog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          child: Column(
-            children: [
-              Text(
-                'The domain you select will be your site\'s address',
-                style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Poppins-Light'),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              CustomTextFields(
-                hintText: 'www.google.com',
-              ),
-              CustomTextFields(
-                hintText: 'For example connect www.mystunningwebsite.com',
-              ),
-              CustomSignButton(
-                  textColor: Colors.white,
-                  buttonName: 'Build now',
-                  buttoncolor: Colors.black,
-                  onPress: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (contex) => EditProfile()));
-                  })
-            ],
-          ),
-        );
-      },
-    );
-  }
+  var getUrl;
+  var fileName;
+  DatabaseStorageServices databaseStorage = DatabaseStorageServices();
+  File? image;
+   File? favIon;
+  bool isLoading = false;
+  // Future<void> getImageFromGallery() async {
+  //   final pickedFile =
+  //       await ImagePicker().getImage(source: ImageSource.gallery) as PickedFile;
+  //   if (pickedFile != null) {
+  //     image = File(pickedFile.path);
+  //     notifyListeners();
+  //   }
+  // }
+  
+  ///  File? image ======>>>
+  ///
+ 
 }

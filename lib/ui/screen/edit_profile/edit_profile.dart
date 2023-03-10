@@ -1,15 +1,22 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_login_ui/core/enums/view_state.dart';
 import 'package:flutter_login_ui/ui/screen/auth/signin_sceen/login_screen.dart';
 import 'package:flutter_login_ui/ui/screen/widgets/custom_sign_button.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:provider/provider.dart';
 
+import '../auth/signin_sceen/loginProvider.dart';
 import '../build_website/build_website.dart';
+import '../build_website/build_website_provider.dart';
 import '../content_detail/content_detil.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'edit_profile_provider.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -42,218 +49,237 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: Container(
-        height:MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/wallpaper (4).png"),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.1), BlendMode.dstATop),
+     return ChangeNotifierProvider(create: (context) {
+      return EditProfileProvider();
+    }, child: Consumer<EditProfileProvider>(builder: (context, model, child) {
+      return Scaffold(
+          body:  ModalProgressHUD(
+          progressIndicator: CircularProgressIndicator(
+            color: Colors.blue,
           ),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Column(children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.10),
-                Center(
-                    child:
-                        SvgPicture.asset('assets/images/Sabki.site (3).svg')),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.07),
-                Text("Edit profile",
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Poppins-Light'),
-                    )),
-              ]),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Business Name",
+          inAsyncCall: model.state == ViewState.busy,
+            child: SafeArea(
+                  child: Container(
+            height:MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/wallpaper (4).png"),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.1), BlendMode.dstATop),
+              ),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(children: [
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.10),
+                    Center(
+                        child:
+                            SvgPicture.asset('assets/images/Sabki.site (3).svg')),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.07),
+                    Text("Edit profile",
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                               color: Colors.black,
-                              fontSize: 14,
+                              fontSize: 25,
                               fontWeight: FontWeight.w500,
                               fontFamily: 'Poppins-Light'),
-                        ),
-                      ),
-                      CustomTextFields(
-                        hintText: 'Enter Your Business Name',
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Website Url",
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Poppins-Light'),
-                        ),
-                      ),
-                      CustomTextFields(
-                        hintText: 'https://www.sabkisite.com/user12',
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      //------------------upload Logo------------------
-                      Text(
-                        "Logo",
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Poppins-Light'),
-                        ),
-                      ),
-                      Row(
+                        )),
+                  ]),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                              child: Container(
-                            height: 100,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Center(
-                              child:
-                               image==null?   smallCustomButtonEdit(
+                          Text(
+                            "Business Name",
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Poppins-Light'),
+                            ),
+                          ),
+                          CustomTextFields(
+                            onPress: (Value){
+                              model.appUser.businessName=Value;
+                            },
+                            controller: model.businessNameController,
+                            hintText: 'Enter Your Business Name',
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Website Url",
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Poppins-Light'),
+                            ),
+                          ),
+                          CustomTextFields(
+                            hintText: 'https://www.sabkisite.com/user12',
+                            onPress: (Value){
+                              model.appUser.websiteUrl=Value;
+                            },
+                              controller: model.websiteUrlController,
+                            
+                            
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          //------------------upload Logo------------------
+                          Text(
+                            "Logo",
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Poppins-Light'),
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: Container(
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Center(
+                                  child:
+                                  model. image==null?   smallCustomButtonEdit(
+                                        
+                                          onPress: () {
+                                           model.getImage();
+                                          },
+                                          buttonName: 'Choose Logo',
+                                          buttonColor: Colors.grey.shade200,
+                                          textColor: Colors.black,
+                                        ):InkWell(
+                                          onTap: (){
+                                           model.getImage();
+                                          },
+                                          child: Image.file(
+                                                 model. image!,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                        ),
                                     
-                                      onPress: () {
-                                        getImageFromGallery();
-                                      },
-                                      buttonName: 'Choose Logo',
-                                      buttonColor: Colors.grey.shade200,
-                                      textColor: Colors.black,
-                                    ):InkWell(
-                                      onTap: (){
-                                        getImageFromGallery();
-                                      },
-                                      child: Image.file(
-                                              image!,
-                                              fit: BoxFit.fill,
-                                            ),
-                                    ),
-                                
+                                ),
+                              )),
+                              //------------------- Update Logo Button
+                              Expanded(
+                                  child: Container(
+                                child: Center(
+                                  child: smallCustomButtonEdit(
+                                    onPress: (){
+                                      model.UploadImage();
+                                    },
+                                    buttonName: 'Update Logo',
+                                    buttonColor: Colors.black,
+                                    textColor: Colors.white,
+                                  )
+                                ),
+                              ))
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                       Text(
+                            "FavIcon",
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Poppins-Light'),
                             ),
-                          )),
-                          //------------------- Update Logo Button
-                          Expanded(
-                              child: Container(
-                            child: Center(
-                              child: smallCustomButtonEdit(
-                                onPress: (){
-                                  getImageFromGallery();
-                                },
-                                buttonName: 'Update Logo',
-                                buttonColor: Colors.black,
-                                textColor: Colors.white,
-                              )
-                            ),
-                          ))
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                   Text(
-                        "Logo",
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Poppins-Light'),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                              child: Container(
-                            height: 100,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Center(
-                              child:
-                               image2==null?   smallCustomButtonEdit(
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: Container(
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Center(
+                                  child:
+                                   model.favIon==null?   smallCustomButtonEdit(
+                                        
+                                          onPress: () {
+                                            model.getFavIcon();
+                                          },
+                                          buttonName: 'Choose Image',
+                                          buttonColor: Colors.grey.shade200,
+                                          textColor: Colors.black,
+                                        ):InkWell(
+                                          onTap: (){
+                                            model.getFavIcon();
+                                          },
+                                          child: Image.file(
+                                                 model.favIon!,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                        ),
                                     
-                                      onPress: () {
-                                        getImageFromGallery2();
-                                      },
-                                      buttonName: 'Choose Image',
-                                      buttonColor: Colors.grey.shade200,
-                                      textColor: Colors.black,
-                                    ):InkWell(
-                                      onTap: (){
-                                        getImageFromGallery2();
-                                      },
-                                      child: Image.file(
-                                              image2!,
-                                              fit: BoxFit.fill,
-                                            ),
-                                    ),
-                                
+                                ),
+                              )),
+                              //------------------- Update Logo Button
+                              Expanded(
+                                  child: Container(
+                                child: Center(
+                                  child: smallCustomButtonEdit(
+                                    onPress: (){
+                                     model.UploadFavIcon();
+                                    },
+                                    buttonName: 'Update Image',
+                                    buttonColor: Colors.black,
+                                    textColor: Colors.white,
+                                  )
+                                ),
+                              ))
+                            ],
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 35),
+                            child: CustomSignButton(
+                              buttonName: 'Next',
+                              buttoncolor: Colors.white,
+                              textColor: Colors.black,
+                              onPress: () {
+                                model.updateProfile(model.appUser
+                                , context);
+                              },
                             ),
-                          )),
-                          //------------------- Update Logo Button
-                          Expanded(
-                              child: Container(
-                            child: Center(
-                              child: smallCustomButtonEdit(
-                                onPress: (){
-                                  getImageFromGallery2();
-                                },
-                                buttonName: 'Update Image',
-                                buttonColor: Colors.black,
-                                textColor: Colors.white,
-                              )
-                            ),
-                          ))
-                        ],
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 35),
-                        child: CustomSignButton(
-                          buttonName: 'Next',
-                          buttoncolor: Colors.white,
-                          textColor: Colors.black,
-                          onPress: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ContentDetail()));
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ]),
-              )
-            ],
-          ),
-        ),
-      ),
-    ));
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ]),
+                  )
+                ],
+              ),
+            ),
+                  ),
+                ),
+          )
+      );
+  }));
   }
 }
 

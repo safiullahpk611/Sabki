@@ -61,11 +61,14 @@ class LoginProvider extends BaseViewModal {
           Get.off(() => LoginScreen());
         }
       } else {
-        // showSnackBar(
-        //   context,
-        //   "${customAuthResult.errorMessage!}",
-        //   duration: 5000,
-        // );
+      Get.showSnackbar(
+                  GetSnackBar(
+                   
+                    message: 'Wrong password',
+              
+                    duration: const Duration(seconds: 3),
+                  ),
+                );
       }
     }
   }

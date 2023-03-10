@@ -3,6 +3,8 @@ import 'package:flutter_login_ui/ui/screen/plugins_screen/plugins_screen_provide
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/locator.dart';
+import '../../../core/services/auth_Services.dart';
 import '../widgets/custom_appbar.dart';
 
 class PluginsScreen extends StatefulWidget {
@@ -13,6 +15,7 @@ class PluginsScreen extends StatefulWidget {
 }
 
 class _PluginsScreenState extends State<PluginsScreen> {
+     final locateUser = locator<AuthServices>();
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -41,7 +44,7 @@ class _PluginsScreenState extends State<PluginsScreen> {
 
                   /// Custom Appbar =====>>>
                   ///
-                  CustomAppbar(),
+                  CustomAppbar(title: locateUser.appUser.userName,),
                   SizedBox(
                     height: 10,
                   ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/locator.dart';
+import '../../../core/services/auth_Services.dart';
 import '../widgets/custom_appbar.dart';
 
 class InquiresScreen extends StatefulWidget {
@@ -12,6 +14,7 @@ class InquiresScreen extends StatefulWidget {
 
 class _InquiresScreenState extends State<InquiresScreen> {
   @override
+  final locateUser = locator<AuthServices>();
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -34,7 +37,7 @@ class _InquiresScreenState extends State<InquiresScreen> {
 
               /// Custom Appbar =====>>>
               ///
-              CustomAppbar(),
+              CustomAppbar(title: locateUser.appUser.userName,),
               SizedBox(
                 height: 10,
               ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/locator.dart';
+import '../../../core/services/auth_Services.dart';
 import '../widgets/custom_appbar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+   final locateUser = locator<AuthServices>();
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -35,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 /// Custom Appbar =====>>>
                 ///
-                CustomAppbar(),
+                CustomAppbar(title: '${locateUser.appUser.userName}',),
                 SizedBox(
                   height: 30,
                 ),

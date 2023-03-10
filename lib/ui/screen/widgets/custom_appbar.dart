@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_ui/ui/screen/content_detail/content_detil.dart';
 
 class CustomAppbar extends StatelessWidget {
-  const CustomAppbar({Key? key}) : super(key: key);
+  final title;
+  const CustomAppbar({this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +22,21 @@ class CustomAppbar extends StatelessWidget {
           children: [
             Text("Hello"),
             Text(
-              "Jinni",
+              title,
               style: TextStyle(fontWeight: FontWeight.bold),
             )
           ],
         ),
         Expanded(child: SizedBox()),
-        Icon(
-          Icons.search,
+        IconButton(
+        icon:  Icon(Icons.search,
           color: Colors.black,
-          size: 25,
-        )
+          size: 25),
+          onPressed: (){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ContentDetail()));
+          },
+
+        ),
       ],
     );
   }

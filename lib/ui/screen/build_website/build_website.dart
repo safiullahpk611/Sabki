@@ -98,7 +98,7 @@ class _BuildWebsiteState extends State<BuildWebsite> {
                             onPress: (value) {
                               model.appUser.businessName = value;
                             },
-                            controller: model.nameController,
+                            controller: model.businessNameController,
                           ),
                           SizedBox(
                             height: 40,
@@ -237,11 +237,13 @@ class CustomTextFields extends StatelessWidget {
   final hintText;
   final onPress;
   final controller;
+  final validator;
   const CustomTextFields({
     super.key,
     this.hintText,
     this.onPress,
-    this.controller
+    this.controller,
+    this.validator
   });
 
   @override
@@ -257,6 +259,7 @@ class CustomTextFields extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Center(
           child: TextFormField(
+            validator: validator,
             onChanged: onPress,
             controller: controller,
             decoration: InputDecoration(

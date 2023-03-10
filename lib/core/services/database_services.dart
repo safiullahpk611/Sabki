@@ -94,6 +94,7 @@ class DatabaseServices {
   ///
 
   updateUserProfile(AppUser appUser) async {
+    print(">>>>>>>>> ${appUser.appUserId}");
     try {
       await firebaseFireStore
           .collection('AppUser')
@@ -104,27 +105,27 @@ class DatabaseServices {
     }
   }
 
-  //
-  // ///
-  // ///  Set Post Image Data Collection ========>>>
-  // ///
-  // setPostImage(PostImage postImage, String UserId) async {
-  //   try {
-  //     var id = DateTime.now().microsecondsSinceEpoch.toString();
-  //     postImage.postImageId = id;
-  //
-  //     await firebaseFireStore
-  //         .collection('PostImage')
-  //         .doc(UserId)
-  //         .collection('AllPostImages')
-  //         .doc(id)
-  //         .set(postImage.toJson());
-  //     return true;
-  //   }
-  //   catch (e) {
-  //     print("Exception@MakingPostImage=>$e");
-  //   }
-  // }
+  
+  ///
+  ///  Set Post Image Data Collection ========>>>
+  ///
+  setPostImage(AppUser postImage, String UserId) async {
+    try {
+      var id = DateTime.now().microsecondsSinceEpoch.toString();
+      postImage.logoImage = id;
+  
+      await firebaseFireStore
+          .collection('PostImage')
+          .doc(UserId)
+          .collection('AllPostImages')
+          .doc(id)
+          .set(postImage.toJson());
+      return true;
+    }
+    catch (e) {
+      print("Exception@MakingPostImage=>$e");
+    }
+  }
 
   // ///
   // ///  Delete Post Image Data Collection ========>>>

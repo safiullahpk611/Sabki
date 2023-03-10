@@ -29,6 +29,7 @@ class LoginScreen extends StatelessWidget {
           inAsyncCall: model.state == ViewState.busy,
           child: Container(
             width: double.infinity,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               color: Colors.black,
               image: DecorationImage(
