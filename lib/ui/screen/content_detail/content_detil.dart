@@ -29,6 +29,7 @@ class ContentDetail extends StatelessWidget {
         inAsyncCall: model.state == ViewState.busy,
         child: SafeArea(
           child: Container(
+            height:MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/wallpaper (4).png"),

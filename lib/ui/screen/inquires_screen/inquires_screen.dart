@@ -37,7 +37,16 @@ class _InquiresScreenState extends State<InquiresScreen> {
 
               /// Custom Appbar =====>>>
               ///
-              CustomAppbar(title: locateUser.appUser.userName,),
+          CustomAppbar(
+                      title: '${locateUser.appUser.userName}',
+                      profilePic: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: locateUser.appUser.profileImage != null
+                            ? NetworkImage("${locateUser.appUser.profileImage}")
+                            : AssetImage('assets/icons/profile.png')
+                                as ImageProvider,
+                      ),
+                    ),
               SizedBox(
                 height: 10,
               ),

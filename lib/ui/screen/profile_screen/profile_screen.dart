@@ -31,14 +31,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       },
       child: Consumer<ProfileScreenProvider>(builder: (context, model, child) {
         return Scaffold(
-          appBar: AppBar(actions: [
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            actions: [
             Padding(
               padding: const EdgeInsets.only(right: 15),
               child: InkWell(
                   onTap: () {
                     model.logout(context);
                   },
-                  child: Icon(Icons.login_outlined)),
+                  child: Icon(Icons.login_outlined,color: Colors.black,)),
             )
           ]),
           body: Container(
@@ -63,6 +66,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     /// Custom Appbar =====>>>
                     CustomAppbar(
                       title: '${locateUser.appUser.userName}',
+                      profilePic: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: locateUser.appUser.profileImage != null
+                            ? NetworkImage("${locateUser.appUser.profileImage}")
+                            : AssetImage('assets/icons/profile.png')
+                                as ImageProvider,
+                      ),
                     ),
                     SizedBox(
                       height: 30,
@@ -110,33 +120,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ///
                             ///    Password view Screen ==================>>>
                             ///
-                            InkWell(
-                              onTap: () {
-                                model.getValue(1);
-                              },
-                              child: Container(
-                                height: 32,
-                                width: 75,
-                                decoration: model.value == 1
-                                    ? BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(10),
-                                      )
-                                    : BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                child: Center(
-                                    child: Text(
-                                  "Password",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: model.value == 1
-                                          ? Colors.white
-                                          : Colors.black),
-                                )),
-                              ),
-                            ),
 
                             ///
                             ///    Information view Screen ==================>>>
@@ -214,30 +197,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                     Row(
                                       children: [
-                                        Image.asset(
-                                          'assets/icons/profile.png',
-                                          height: 100,
+                                        model.imgExist==true?
+                                         InkWell(
+                                          onTap: (){
+                                            model.getImage();
+                                          },
+                                          child: CircleAvatar(child: Image.file(model.image!,height: 60,width: 60,))):
+                                        InkWell(
+                                          onTap: (){
+                                            model.getImage();
+                                          
+                                          },
+                                          child: CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage: locateUser
+                                                        .appUser.profileImage !=
+                                                    null
+                                                ? NetworkImage(
+                                                    "${locateUser.appUser.profileImage}")
+                                                : AssetImage(
+                                                        'assets/icons/profile.png')
+                                                    as ImageProvider,
+                                          ),
                                         ),
+                                        // Image.asset(
+                                        //   'assets/icons/profile.png',
+                                        //   height: 100,
+                                        // ),
                                         Expanded(
                                           child: SizedBox(),
                                         ),
 
                                         /// Upload Container
-                                        Container(
-                                            height: 30,
-                                            width: 75,
-                                            decoration: BoxDecoration(
-                                              color: Colors.blue,
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            child: Center(
-                                              child: Text("Upload",
-                                                  style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.white,
-                                                  )),
-                                            )),
+                                        InkWell(
+                                          onTap: (){
+                                         model.UploadImage();
+                                          },
+                                          child: Container(
+                                              height: 30,
+                                              width: 75,
+                                              decoration: BoxDecoration(
+                                                color: Colors.blue,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: Center(
+                                                child: Text("Upload",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white,
+                                                    )),
+                                              )),
+                                        ),
                                         SizedBox(
                                           width: 10,
                                         ),
@@ -276,7 +287,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 fontFamily: 'Poppins-Light')),
                                       ),
                                     ),
-                                    CustomTextFields(hintText: "Jinni"),
+                                    CustomTextFields(
+                                        onPress: (value) {
+                                          model.appUser.userName = value;
+                                        },
+                                        controller: model.username,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return "Please enter your UserName";
+                                          }
+                                        },
+                                        hintText: "Jinni"),
                                     SizedBox(
                                       height: 25,
                                     ),
@@ -292,6 +313,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                     CustomTextFields(
+                                        onPress: (value) {
+                                          model.appUser.emailId = value;
+                                        },
+                                        controller: model.emailId,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return "Please enter your Email";
+                                          }
+                                        },
                                         hintText: "granger007@hogward"),
                                     SizedBox(
                                       height: 25,
@@ -307,7 +337,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 fontFamily: 'Poppins-Light')),
                                       ),
                                     ),
-                                    CustomTextFields(hintText: "User123"),
+                                    CustomTextFields(
+                                        onPress: (value) {
+                                          model.appUser.companyName = value;
+                                        },
+                                        controller: model.companyName,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return "Please enter your Compnay Name";
+                                          }
+                                        },
+                                        hintText: "User123"),
                                   ],
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                 ),
@@ -440,6 +480,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 15),
                                                 child: TextFormField(
+                                                  onChanged: (Value) {
+                                                    model.appUser
+                                                            .bussinessShortDescription =
+                                                        Value;
+                                                  },
+                                                  controller: model
+                                                      .bussinessShortDesciption,
                                                   decoration: InputDecoration(
                                                     // filled: true,
                                                     // fillColor: Colors.white,
@@ -470,6 +517,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                             ),
                                             CustomTextFields(
+                                                onPress: (value) {
+                                                  model.appUser.countryName =
+                                                      value;
+                                                },
+                                                controller: model.countryName,
                                                 hintText: "Enter Country Name"),
 
                                             /// Phone No Textfield
@@ -491,6 +543,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                             ),
                                             CustomTextFields(
+                                                onPress: (Value) {
+                                                  model.appUser.phoneNo = Value;
+                                                },
+                                                controller: model.phoneNo,
                                                 hintText:
                                                     "Enter your Phone No"),
                                             SizedBox(
@@ -516,6 +572,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                             ),
                                             CustomTextFields(
+                                                onPress: (Value) {
+                                                  model.appUser.dateofBirth =
+                                                      Value;
+                                                },
+                                                controller: model.dateofBirth,
                                                 hintText:
                                                     "Enter Date of Birth"),
                                             SizedBox(
@@ -551,6 +612,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   ),
                                                 ),
                                                 CustomTextFields(
+                                                    onPress: (Value) {
+                                                      model.appUser
+                                                          .instagramUrl = Value;
+                                                    },
+                                                    controller:
+                                                        model.instagramUrl,
                                                     hintText:
                                                         "Enter your Instagram URL"),
 
@@ -574,6 +641,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   ),
                                                 ),
                                                 CustomTextFields(
+                                                    onPress: (Value) {
+                                                      model.appUser
+                                                          .facebookUrl = Value;
+                                                    },
+                                                    controller:
+                                                        model.facebookUrl,
                                                     hintText:
                                                         "Enter your Facebook URL"),
 
@@ -597,6 +670,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   ),
                                                 ),
                                                 CustomTextFields(
+                                                    onPress: (Value) {
+                                                      model.appUser
+                                                          .twittrerUrl = Value;
+                                                    },
+                                                    controller:
+                                                        model.twittrerUrl,
                                                     hintText:
                                                         "Enter your Twitter URL"),
 
@@ -620,6 +699,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   ),
                                                 ),
                                                 CustomTextFields(
+                                                    onPress: (Value) {
+                                                      model.appUser.youtubeUrl =
+                                                          Value;
+                                                    },
+                                                    controller:
+                                                        model.youtubeUrl,
                                                     hintText:
                                                         "Enter your Youtube URL"),
 
@@ -627,24 +712,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 SizedBox(
                                                   height: 20,
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 15),
-                                                  child: Text(
-                                                    "Whatsapp",
-                                                    style: GoogleFonts.poppins(
-                                                        textStyle: TextStyle(
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontFamily:
-                                                                'Poppins-Light')),
-                                                  ),
-                                                ),
-                                                CustomTextFields(
-                                                    hintText:
-                                                        "Enter your Whatsapp URL"),
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           left: 15),
+                                                //   child: Text(
+                                                //     "Whatsapp",
+                                                //     style: GoogleFonts.poppins(
+                                                //         textStyle: TextStyle(
+                                                //             fontSize: 15,
+                                                //             fontWeight:
+                                                //                 FontWeight.w500,
+                                                //             fontFamily:
+                                                //                 'Poppins-Light')),
+                                                //   ),
+                                                // ),
+
                                                 SizedBox(
                                                   height: 20,
                                                 ),
@@ -657,22 +740,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ///
                         SizedBox(height: 35),
                         Center(
-                          child: Container(
-                            height: 40,
-                            width: 110,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.black,
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Update Profile ",
-                                style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Poppins-Light')),
+                          child: InkWell(
+                            onTap: () {
+                              model.updateProfile(model.appUser, context);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 110,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.black,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Update Profile ",
+                                  style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Poppins-Light')),
+                                ),
                               ),
                             ),
                           ),

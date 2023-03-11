@@ -12,7 +12,7 @@ class MoreScreen extends StatefulWidget {
 }
 
 class _MoreScreenState extends State<MoreScreen> {
-  final locateUser = locator<AuthServices>();
+ final locateUser = locator<AuthServices>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,10 +42,16 @@ class _MoreScreenState extends State<MoreScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/icons/profile.png',
-                          height: 90,
-                        ),
+                   
+                    
+                     CircleAvatar(
+                        radius: 50,
+                        backgroundImage: locateUser.appUser.profileImage != null
+                            ? NetworkImage("${locateUser.appUser.profileImage}")
+                            : AssetImage('assets/icons/profile.png')
+                                as ImageProvider,
+                      ),
+                  
                         SizedBox(
                           width: 10,
                         ),

@@ -3,16 +3,18 @@ import 'package:flutter_login_ui/ui/screen/content_detail/content_detil.dart';
 
 class CustomAppbar extends StatelessWidget {
   final title;
-  const CustomAppbar({this.title});
+  final profilePic;
+  const CustomAppbar({this.title,this.profilePic});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(
-          'assets/icons/profile.png',
-          height: 50,
-        ),
+        profilePic,
+        // Image.asset(
+        //   'assets/icons/profile.png',
+        //   height: 50,
+        // ),
         SizedBox(
           width: 10,
         ),
@@ -29,7 +31,7 @@ class CustomAppbar extends StatelessWidget {
         ),
         Expanded(child: SizedBox()),
         IconButton(
-        icon:  Icon(Icons.search,
+        icon:  Icon(Icons.edit,
           color: Colors.black,
           size: 25),
           onPressed: (){

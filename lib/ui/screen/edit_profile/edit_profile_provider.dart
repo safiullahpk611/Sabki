@@ -80,7 +80,7 @@ class EditProfileProvider extends BaseViewModal {
     appUser.appUserId = currentAppUser.appUserId;
 
     if (image != null) {
-      appUser.logoImage = await databaseStorageServices.uploadUserImage(
+      appUser.profileImage = await databaseStorageServices.uploadUserImage(
           favIon!, currentAppUser.appUserId!);
     }
     //postImage.postImageDate = now.toString();

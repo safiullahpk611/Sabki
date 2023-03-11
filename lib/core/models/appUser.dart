@@ -24,6 +24,10 @@ class AppUser {
   String? facebookUrl;
   String? twittrerUrl;
   String? youtubeUrl;
+  String?companyName;
+  String?countryName;
+  String?dateofBirth;
+  String?profileImage;
 
   AppUser({
     this.appUserId,
@@ -50,6 +54,10 @@ class AppUser {
     this.instagramUrl,
     this.twittrerUrl,
     this.youtubeUrl,
+    this.companyName,
+    this.countryName,
+    this.dateofBirth,
+    this.profileImage,
   });
 
   AppUser.fromJson(json, id) {
@@ -79,6 +87,11 @@ class AppUser {
     this.facebookUrl = json['facebookUrl'];
     this.twittrerUrl = json['twittrerUrl'];
     this.youtubeUrl = json['youtubeUrl'];
+    this.companyName= json['companyName'];
+    this.countryName=json['countryName'];
+    this.dateofBirth=json['dateofBirth'];
+    this.profileImage=json['profileImage'];
+    
   }
 
   toJson() {
@@ -107,6 +120,10 @@ class AppUser {
       'twittrerUrl': this.twittrerUrl,
       'instagramUrl': this.instagramUrl,
       'youtubeUrl': this.youtubeUrl,
+      'companyName':this.companyName,
+      'countryName':this.countryName,
+      'dateofBirth':this.dateofBirth,
+            'profileImage':this.profileImage
     };
   }
 }
