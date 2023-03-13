@@ -61,5 +61,12 @@ class SignUpProvider extends BaseViewModal {
       } else {
       }}
   }
+bool isAgreeTermsAndConditions = false;
+      termsAndConditions(value) {
+    isAgreeTermsAndConditions = value;
+    if (value == true) {}
+    print("Terms and conditions $isAgreeTermsAndConditions");
+    notifyListeners();
+  }
 }
 

@@ -80,8 +80,8 @@ class EditProfileProvider extends BaseViewModal {
     appUser.appUserId = currentAppUser.appUserId;
 
     if (image != null) {
-      appUser.profileImage = await databaseStorageServices.uploadUserImage(
-          favIon!, currentAppUser.appUserId!);
+      appUser.logoImage = await databaseStorageServices.uploadUserImage(
+          image!, currentAppUser.appUserId!);
     }
     //postImage.postImageDate = now.toString();
 
@@ -96,7 +96,7 @@ class EditProfileProvider extends BaseViewModal {
 
     appUser.appUserId = currentAppUser.appUserId;
 
-    if (image != null) {
+    if (favIon != null) {
       appUser.favIcon = await databaseStorageServices.uploadUserImage(
           favIon!, currentAppUser.appUserId!);
     }

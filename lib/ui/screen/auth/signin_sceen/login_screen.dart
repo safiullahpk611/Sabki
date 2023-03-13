@@ -12,6 +12,7 @@ import '../../widgets/custom_sign_button.dart';
 import '../../widgets/custom_textfield.dart';
 import '../reset_password_screen/reset_password_screen.dart';
 import '../signUp_user/signUpScreen.dart';
+import '../sign_up_with_phone/signUp_with_phone.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -256,10 +257,15 @@ class LoginScreen extends StatelessWidget {
                                         Image.asset('assets/images/google.png')),
                               )),
                               Expanded(
-                                  child: Container(
-                                child: Center(
-                                    child: Image.asset('assets/images/call.png')),
-                              )),
+                                  child: InkWell(
+                                    onTap: (){
+                                     Get.to(() => SignUpWithPhone());
+                                    },
+                                    child: Container(
+                                                                  child: Center(
+                                      child: Image.asset('assets/images/call.png')),
+                                                                ),
+                                  )),
                             ]),
                           ),
                           SizedBox(

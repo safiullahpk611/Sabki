@@ -6,12 +6,14 @@ class CustomSignButton extends StatelessWidget {
   final onPress;
   Color buttoncolor;
   Color textColor;
+  bool loading=false;
   CustomSignButton({
     super.key,
     this.buttonName,
     this.onPress,
     this.buttoncolor = Colors.black,
     this.textColor = Colors.black,
+    this.loading=false
   });
 
   @override

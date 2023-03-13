@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_ui/ui/screen/auth/sign_up_with_phone/signUp_with_phone.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -197,9 +199,9 @@ class SignUpScreen extends StatelessWidget {
                                         // color: Colors.white,
                                         child: Checkbox(
                                       onChanged: (val) {
-                                        model.chanegeCheckBox(val);
+                                        model.termsAndConditions(val);
                                       },
-                                      value: model.checkBoxVal,
+                                      value: model.isAgreeTermsAndConditions,
                                       checkColor: Colors.white,
                                       side: BorderSide(color: Colors.white),
                                     )),
@@ -229,7 +231,19 @@ class SignUpScreen extends StatelessWidget {
                             textColor: Colors.black,
                             buttonName: 'Sign Up',
                             onPress: () async {
+                                if (model.isAgreeTermsAndConditions ==
+                                                  true)
                               model.signUpUser(model.appUser, context);
+                              else{
+                                 Get.showSnackbar(
+                  GetSnackBar(
+                   
+                    message: 'you have agree to terms and conditiin',
+              
+                    duration: const Duration(seconds: 3),
+                  ),
+                );
+                              }
                             },
                           ),
                         ),
@@ -285,7 +299,11 @@ class SignUpScreen extends StatelessWidget {
                             Expanded(
                                 child: Container(
                               child: Center(
-                                  child: Image.asset('assets/images/call.png')),
+                                  child: InkWell(
+                                    onTap: (){
+                                      Get.to(SignUpWithPhone());
+                                    },
+                                    child: Image.asset('assets/images/call.png'))),
                             )),
                           ]),
                         ),

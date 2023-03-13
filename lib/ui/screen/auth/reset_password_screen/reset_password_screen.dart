@@ -39,6 +39,35 @@ class ResetPasswordScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 20),
                       ),
                       SizedBox(height: 40),
+                      Container(
+      height: 50,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: TextFormField(
+          obscureText: false,
+        onChanged: (value) {
+                          model.email = value.trim();
+                        },
+         validator: (value) {
+                          if (value!.isEmpty || !value.contains("@")) {
+                            return "Please enter valid email";
+                          }
+                        },
+     
+          style: TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: 'Enter Your Email',
+            hintStyle: TextStyle(color: Colors.black),
+            
+          ),
+        ),
+      ),
+    ),
                       CustomSignTextfield(
                         hintText: 'Enter Email',
                         onChanged: (value) {

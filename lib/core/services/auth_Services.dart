@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_login_ui/ui/screen/auth/sign_up_with_phone/token_verification_screen.dart';
+import 'package:get/get.dart';
 import '../models/appUser.dart';
 import 'auth_exception_message.dart';
 import 'custom_auth_result.dart';
 import 'database_services.dart';
 
-class AuthServices{
-
+class AuthServices {
   final databaseServices = DatabaseServices();
   final customAuthResult = CustomAuthResult();
   final authInstant = FirebaseAuth.instance;
@@ -13,12 +15,11 @@ class AuthServices{
   User? user;
   AppUser appUser = AppUser();
 
-
-  AuthServices(){
+  AuthServices() {
     init();
   }
 
-  init() async{
+  init() async {
     user = authInstant.currentUser;
     if (user != null) {
       print("User is already logged in");
@@ -26,20 +27,17 @@ class AuthServices{
       this.appUser = await databaseServices.getUser(user!.uid);
       print('userId => ${this.appUser.appUserId}');
     } else {
-
       isLogin = false;
     }
   }
 
   // //
-  Future<CustomAuthResult> signUpUser(AppUser appUser) async{
+  Future<CustomAuthResult> signUpUser(AppUser appUser) async {
     print("???????????");
-    try{
+    try {
       final credential = await authInstant.createUserWithEmailAndPassword(
-          email: appUser.userEmail!,
-          password: appUser.userPassword!
-      );
-      if(credential.user != null){
+          email: appUser.userEmail!, password: appUser.userPassword!);
+      if (credential.user != null) {
         print('================>>> User registered');
         this.appUser = appUser;
 
@@ -55,46 +53,44 @@ class AuthServices{
 
         customAuthResult.user = credential.user;
       }
-    }
-    catch(e){
+    } catch (e) {
       print('Exception@signUpUser oooops $e');
-      customAuthResult.errorMessage = AuthExceptionsMessages.generateExceptionMessage(e);
+      customAuthResult.errorMessage =
+          AuthExceptionsMessages.generateExceptionMessage(e);
     }
     return customAuthResult;
   }
 
-
   ///
   /// Login User  ===================================>>>
   ///
-  Future<CustomAuthResult> loginUser(AppUser appUser)async{
-
+  Future<CustomAuthResult> loginUser(AppUser appUser) async {
     print("App user email: ${appUser.userEmail}");
     print("App user Password: ${appUser.userPassword}");
 
-    try{
+    try {
       final credentials = await authInstant.signInWithEmailAndPassword(
-          email: appUser.userEmail!,
-          password: appUser.userPassword!,
+        email: appUser.userEmail!,
+        password: appUser.userPassword!,
       );
       print("===========>>> User login Successfully");
-      if(credentials.user != null){
+      if (credentials.user != null) {
         print(">>>>>>>>>>>>>>>>.>>>>>>>>>>>>>>>>>>>>> user not null");
         customAuthResult.user = credentials.user;
         this.appUser = appUser;
         this.appUser.appUserId = credentials.user!.uid;
         this.isLogin = true;
-        this.appUser.isFirstLogin=true;
+        this.appUser.isFirstLogin = true;
+
         ///
         /// Get User ===========================>>>>
         ///
         this.appUser = await databaseServices.getUser(credentials.user!.uid);
-
       }
-    }
-    catch(e){
+    } catch (e) {
       print('Exception@LoginUser $e');
-      customAuthResult.errorMessage = AuthExceptionsMessages.generateExceptionMessage(e);
+      customAuthResult.errorMessage =
+          AuthExceptionsMessages.generateExceptionMessage(e);
     }
     return customAuthResult;
   }
@@ -102,12 +98,11 @@ class AuthServices{
   ///
   /// Reset User Password ==========================>>>
   ///
-  resetUserPassword(String email) async{
+  resetUserPassword(String email) async {
     print('Reset User password Email=>$email');
     await authInstant.sendPasswordResetEmail(email: email);
     print('Link sent to Email=>$email');
   }
-
 
   ///
   /// logout ==================================>>>
@@ -121,4 +116,35 @@ class AuthServices{
     print("==========>>> User logout Successfully....");
   }
 
+  signUpWithPhoneNum(final controller, BuildContext context) {
+    authInstant.verifyPhoneNumber(
+      phoneNumber: controller.toString(),
+      verificationCompleted: (_) {}
+      ,
+      verificationFailed: (e) {
+        Get.showSnackbar(
+          GetSnackBar(
+            message: '${e.toString()}',
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      },
+      codeSent: (String verificationId, int? token) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => TokenVerificationScren(
+                      verificationId: verificationId,
+                    )));
+      },
+      codeAutoRetrievalTimeout: (e) {
+        Get.showSnackbar(
+          GetSnackBar(
+            message: '${e.toString()}',
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      },
+    );
+  }
 }
